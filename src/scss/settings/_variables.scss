@@ -1,0 +1,23 @@
+.buttons {
+  padding: 0.5rem 1rem;
+  margin: 1rem;
+  font-size: 1.5rem;
+  font-family: $font-base;
+  color: $headerTextColor;
+  background: $headerButtonBackground;
+  border: none;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.buttons__small {
+  padding: 0.5rem 1rem;
+  margin: 1rem;
+  font-size: 1rem;
+  font-family: $font-base;
+  color: $headerTextColor;
+  background: $headerButtonBackground;
+  border: none;
+  text-transform: uppercase;
+  font-weight: 500;
+}

@@ -3,5 +3,9 @@
 @import "settings/fonts";
 @import "settings/mixins";
 @import "settings/reset";
+@import "settings/variables";
 @import "components/welcomeHeader";
 @import "components/welcomeFooter";
+@import "components/welcomeText";
+@import "components/login";
+@import "components/register";
