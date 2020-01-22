@@ -4,7 +4,7 @@ import WelcomeFooter from "./../Welcome/WelcomeFooter";
 import {NavLink} from "react-router-dom";
 import errorIcon from './../../assets/error.png'
 import ReactTooltip from 'react-tooltip'
-import firebase from "../../firebase/firebase";
+import firebase from "../firebase/firebase";
 
 class Login extends Component {
     state = {
@@ -47,6 +47,8 @@ class Login extends Component {
                         password: "",
                     });
 
+                    authUser = firebase.auth().currentUser;
+
                     const {history} = this.props;
                     history.push("/home");
 
@@ -69,10 +71,12 @@ class Login extends Component {
                     }
                 });
 
+
             this.setState({
                 email: "",
                 password: "",
             });
+
 
         } else {
             if (!emailValidation.test(email)) {
