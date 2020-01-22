@@ -9,10 +9,9 @@ import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
 import { AnimatedSwitch } from 'react-router-transition';
 import Home from "./components/Home/Home";
-import firebase from "./components/firebase/firebase";
 import PrivateRoute from "./components/Session/PrivateRoute"
 import { AuthProvider } from "./components/Session/AuthProvider";
-console.log(firebase.auth().currentUser)
+import Forum from "./components/Home/Forum";
 
 class App extends Component {
 
@@ -31,6 +30,7 @@ class App extends Component {
                         <Route exact path='/login' component={Login}/>
                         <Route exact path='/register' component={Register}/>
                         <PrivateRoute exact path='/home' component={Home}/>
+                        <PrivateRoute exact path='/forum' component={Forum}/>
                     </AnimatedSwitch>
                 </Switch>
             </HashRouter>

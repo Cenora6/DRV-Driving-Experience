@@ -1,18 +1,17 @@
 import React, {Component} from 'react';
-import firebase from "../firebase/firebase";
 import Header from "./Header";
 
-class Home extends Component {
+class Forum extends Component {
 
     render() {
 
         return (
             <>
             <Header/>
-            <span> those are tips</span>
+            <span>this is forum</span>
             </>
         )
     }
 }
 
-export default Home;
+export default Forum;

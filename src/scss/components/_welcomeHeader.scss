@@ -3,6 +3,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  height: 6rem;
 
   &__title {
     font-size: 2rem;
@@ -17,4 +18,105 @@
     margin: 1rem;
   }
 
+  &__user {
+    color: $headerTextColor;
+    margin: 2rem 2rem 2rem 0;
+
+    &__name {
+      text-align: center;
+      font-family: $font-base;
+      font-weight: bold;
+      text-transform: lowercase;
+      font-size: 1.3rem;
+      margin-bottom: -0.1rem;
+
+    }
+
+    &__desc {
+      font-family: $font-base;
+      font-weight: 500;
+      font-size: 0.8rem;
+      text-align: center;
+    }
+
+    span {
+      cursor: pointer;
+      &:hover {
+        opacity: 0.5;
+      }
+    }
+  }
+}
+
+.links {
+
+  &__list {
+    display: flex;
+    justify-content: space-around;
+
+    li {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0.5rem 0;
+      text-transform: uppercase;
+      font-weight: 600;
+      width: 33.3%;
+      position: relative;
+      overflow: hidden;
+      transition: color 0.75s ease-in-out;
+      z-index: 1;
+      border-radius: 0;
+      color: $altTextColor;
+      text-shadow: 1px 2px 3px black;
+      cursor: pointer;
+
+      &:before,
+      &:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -25%;
+        width: 150%;
+        height: 100%;
+        background: rgba($headerTextColor, 0.5);
+        transition: transform 0.75s ease-in-out;
+        z-index: -1;
+      }
+
+      &:before {
+        transform: translate3d(100%, 0, 0) skew(20deg);
+        transform-origin: 0 0;
+      }
+
+      &:after {
+        transform: translate3d(-100%, 0, 0) skew(20deg);
+        transform-origin: 100% 100%;
+      }
+
+      &:hover,
+      &:active {
+        &:before,
+        &:after {
+          transform: translate3d(0, 0, 0) skew(20deg);
+        }
+      }
+
+    }
+
+    &__advices {
+      background-color: $tipsMenu;
+    }
+
+    &__forum {
+      background-color: $forumMenu;
+    }
+
+    &__search {
+      input {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
 }
