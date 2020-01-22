@@ -21,3 +21,19 @@
   text-transform: uppercase;
   font-weight: 500;
 }
+
+.error__icon {
+  color: red;
+  width: 20px;
+  vertical-align: sub;
+}
+
+.error__class {
+  font-size: 1rem;
+  pointer-events: auto;
+  line-height: 1.5rem;
+  &:hover {
+    visibility: visible;
+    opacity: 1;
+  }
+}
