@@ -4,6 +4,7 @@ import WelcomeFooter from "./../Welcome/WelcomeFooter";
 import {NavLink} from "react-router-dom";
 import errorIcon from './../../assets/error.png'
 import ReactTooltip from 'react-tooltip';
+import firebase from "./../../firebase/firebase";
 
 class Register extends Component {
     state = {
@@ -45,12 +46,52 @@ class Register extends Component {
             passwordConfirm === password &&
             login.length >= 6) {
 
+            firebase
+                .auth()
+                .createUserWithEmailAndPassword(email, password)
+                .then((authUser) => {
+                    const user = firebase.auth().currentUser;
+                    if(user){
+                        user.updateProfile({
+                            displayName: login,
+                            uid: user.uid,
+                    }).then( () => {
+                            console.log("updated successfully!");
+                            const displayName = user.displayName;
+                            const uid = user.uid;
+                            console.log(user, displayName, uid);
+                    }).catch(function(error) {
+                            console.log(error)
+                        })
+                    }
+
+                    this.setState({
+                        login: "",
+                        email: "",
+                        password: "",
+                        password2: ""
+                    });
+
+                    const { history } = this.props;
+                    history.push("/home");
+
+                })
+                .catch((error) => {
+                    if (error.code === 'auth/email-already-in-use') {
+                        this.setState({
+                            registerError: true,
+                            password: "",
+                            password2: ""
+                        })
+                    }
+                });
+
             this.setState({
                 login: "",
                 email: "",
                 password: "",
                 passwordConfirm: "",
-            })
+            });
 
         } else {
             if (password.length < 6) {
@@ -85,7 +126,6 @@ class Register extends Component {
                 <section className='register'>
 
                     <form className='register__form' onSubmit={this.handleFormSubmit}>
-
                         <label htmlFor='login'>{this.state.errorLogin &&
                         <>
                             <span data-for='error__login' data-tip="">
@@ -143,7 +183,19 @@ class Register extends Component {
                             <NavLink to='/login'>
                                 <button className='buttons__small'>Login</button>
                             </NavLink>
-                            <button className='buttons__small' onClick={this.handleFormSubmit}>Register</button>
+                            {this.state.registerError ?
+                                <>
+                                    <span data-for='error__register' data-tip="">
+                                        <button className='buttons__small' onClick={this.handleFormSubmit}>Register</button>
+                                    </span>
+                                    <ReactTooltip className='error__class' id='error__register' type='error' delayHide={2000} effect='solid'>
+                                        <span>The email is already in use.</span>
+                                    </ReactTooltip>
+                                </>
+
+                                :
+                                <button className='buttons__small' onClick={this.handleFormSubmit}>Register</button>
+                            }
                         </div>
 
                     </form>
