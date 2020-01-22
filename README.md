@@ -11,6 +11,8 @@ An app, where you can find some driving tips and take a quiz to check your drivi
 ### Additional dependencies: 
 - [Node Sass](https://www.npmjs.com/package/node-sass/)
 - [React Router Dom](https://www.npmjs.com/package/react-router-dom/)
+- [React Router Transition](https://www.npmjs.com/package/react-router-transition/)
+- [React Router Tooltip](https://www.npmjs.com/package/react-tooltip/)
 
 ### Installation:
 
