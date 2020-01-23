@@ -71,12 +71,6 @@ class Login extends Component {
                     }
                 });
 
-
-            this.setState({
-                email: "",
-                password: "",
-            });
-
         } else {
             if (!emailValidation.test(email)) {
                 this.setState({

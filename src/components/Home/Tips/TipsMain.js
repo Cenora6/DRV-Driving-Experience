@@ -1,7 +1,29 @@
 import React, {Component} from 'react';
 import tipPhoto from './../../../assets/weekly-tip.jpg'
+import firebase from "../../firebase/firebase";
 
 class TipsMain extends Component {
+    state = {
+        question: "",
+    };
+
+    handleChange = (e) => {
+        this.setState({
+            question: e.target.value,
+        })
+    };
+
+    handleSubmit = (e) => {
+
+        const user = firebase.auth().currentUser.displayName;
+        e.preventDefault();
+        const { question } = this.state;
+
+        console.log(user, question);
+        this.setState({
+            question: "",
+        })
+    };
 
     render() {
 
@@ -31,8 +53,37 @@ class TipsMain extends Component {
                             <div className='tips__week__description__button'>
                                 <button className='buttons__small'>Zalicz trening</button>
                             </div>
-
+                            <ul className='tips__week__description__tags'>
+                                <li>
+                                    <i className="fas fa-tags"></i>
+                                </li>
+                                <li>bezpieczeństwo</li>
+                                <li>|</li>
+                                <li>hamowanie</li>
+                                <li>|</li>
+                                <li>technika</li>
+                                <li>|</li>
+                                <li>żywotność</li>
+                                <li>|</li>
+                            </ul>
+                            <div className='tips__week__description__sharing'>
+                                <div className='tips__week__description__sharing__likes'>
+                                    <i className="fas fa-thumbs-up"></i>
+                                    <span>127</span>
+                                </div>
+                                <div className='tips__week__description__sharing__share'>
+                                    <i className="fas fa-share-alt"></i>
+                                    <span>12</span>
+                                </div>
+                            </div>
                         </div>
+                    </div>
+                    <form className='tips__questions'>
+                        <span>Ask question</span>
+                        <textarea value={this.state.question} onChange={this.handleChange}></textarea>
+                    </form>
+                    <div className='tips__button'>
+                        <span onClick={this.handleSubmit} className='buttons__small'>Send</span>
                     </div>
                     <div className='tips__newest'>
 
