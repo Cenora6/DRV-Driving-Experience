@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import firebase from "../firebase/firebase";
 import Header from "./Header";
+import TipsMain from "./Tips/TipsMain";
+import WelcomeFooter from "../Welcome/WelcomeFooter";
 
 class Home extends Component {
 
@@ -9,7 +10,8 @@ class Home extends Component {
         return (
             <>
                 <Header/>
-            <span> those are tips</span>
+                <TipsMain/>
+                <WelcomeFooter/>
             </>
         )
     }
