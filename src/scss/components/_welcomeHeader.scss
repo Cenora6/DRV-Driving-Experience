@@ -61,7 +61,8 @@
       padding: 0.5rem 0;
       text-transform: uppercase;
       font-weight: 600;
-      width: 33.3%;
+      height: 1.5rem;
+      width: 100%;
       position: relative;
       overflow: hidden;
       transition: color 0.75s ease-in-out;
@@ -69,7 +70,6 @@
       border-radius: 0;
       color: $altTextColor;
       text-shadow: 1px 2px 3px black;
-      cursor: pointer;
 
       &:before,
       &:after {
@@ -101,7 +101,6 @@
           transform: translate3d(0, 0, 0) skew(20deg);
         }
       }
-
     }
 
     &__advices {
@@ -116,6 +115,31 @@
       input {
         width: 100%;
         height: 100%;
+      }
+    }
+
+    &__search {
+      input {
+        height: 2.1rem;
+        background-color: $searchInput;
+        border: none;
+        padding: 0.5rem 1rem;
+        font-family: $font-base;
+        opacity: 0.7;
+      }
+
+      span {
+        cursor: pointer;
+
+        .fas {
+          background-color: $searchButton;
+          width: 2.5rem;
+          height: 2.5rem;
+          font-size: 1.5rem;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
       }
     }
   }

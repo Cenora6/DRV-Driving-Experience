@@ -8,7 +8,7 @@ class Home extends Component {
 
         return (
             <>
-            <Header/>
+                <Header/>
             <span> those are tips</span>
             </>
         )

@@ -47,7 +47,7 @@ class Login extends Component {
                         password: "",
                     });
 
-                    authUser = firebase.auth().currentUser;
+                    sessionStorage.setItem("user", `${authUser.user}`);
 
                     const {history} = this.props;
                     history.push("/home");
@@ -77,7 +77,6 @@ class Login extends Component {
                 password: "",
             });
 
-
         } else {
             if (!emailValidation.test(email)) {
                 this.setState({
@@ -92,7 +91,6 @@ class Login extends Component {
         return (
             <>
                 <HeaderWelcome/>
-
                 <section className='login'>
                     <form className='login__form' onSubmit={this.handleFormSubmit}>
                         <label htmlFor='email'>{this.state.errorEmail &&

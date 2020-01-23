@@ -15,14 +15,16 @@ class Header extends Component {
             .catch(error => {
                 console.log(error)
             });
+        sessionStorage.clear();
     };
 
     render() {
-
         const user = firebase.auth().currentUser;
         const linkstyle = {
             textDecoration: "none",
             color: "#FFF",
+            width: "80%",
+            cursor: "pointer",
         };
 
         return (
@@ -39,10 +41,13 @@ class Header extends Component {
                 </section>
                 <section className='links'>
                     <ul className='links__list'>
-                            <li className='links__list__advices cross__fade'><NavLink to='/home/' style={linkstyle}>Advices</NavLink></li>
+                        <NavLink to='/home/' style={linkstyle}>
+                            <li className='links__list__advices cross__fade'>Advices</li>
+                        </NavLink>
 
-
-                            <li className='links__list__forum cross__fade'><NavLink to='/forum/' style={linkstyle}>Forum</NavLink></li>
+                        <NavLink to='/forum/' style={linkstyle}>
+                            <li className='links__list__forum cross__fade'>Forum</li>
+                        </NavLink>
 
                         <li className='links__list__search'>
                             <input name='search' id='search' placeholder='search...'/>

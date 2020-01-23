@@ -16,6 +16,7 @@ import Forum from "./components/Home/Forum";
 class App extends Component {
 
     render() {
+
         return (
             <AuthProvider>
             <HashRouter>

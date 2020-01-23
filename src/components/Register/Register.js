@@ -5,6 +5,7 @@ import {NavLink} from "react-router-dom";
 import errorIcon from './../../assets/error.png'
 import ReactTooltip from 'react-tooltip';
 import firebase from "./../firebase/firebase";
+import Header from "../Home/Header";
 
 class Register extends Component {
     state = {
@@ -121,8 +122,8 @@ class Register extends Component {
 
         return (
             <>
-                <HeaderWelcome/>
 
+                <HeaderWelcome/>
                 <section className='register'>
 
                     <form className='register__form' onSubmit={this.handleFormSubmit}>

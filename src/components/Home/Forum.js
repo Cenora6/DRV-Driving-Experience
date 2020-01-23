@@ -7,8 +7,8 @@ class Forum extends Component {
 
         return (
             <>
-            <Header/>
-            <span>this is forum</span>
+                <Header/>
+                <span>this is forum</span>
             </>
         )
     }
