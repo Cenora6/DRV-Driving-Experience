@@ -12,6 +12,7 @@ import Home from "./components/Home/Home";
 import PrivateRoute from "./components/Session/PrivateRoute"
 import { AuthProvider } from "./components/Session/AuthProvider";
 import Forum from "./components/Home/Forum";
+import MainTest from "./components/Home/Test/MainTest";
 
 class App extends Component {
 
@@ -32,6 +33,7 @@ class App extends Component {
                         <Route exact path='/register' component={Register}/>
                         <PrivateRoute exact path='/home' component={Home}/>
                         <PrivateRoute exact path='/forum' component={Forum}/>
+                        <PrivateRoute exact path='/test' component={MainTest}/>
                     </AnimatedSwitch>
                 </Switch>
             </HashRouter>

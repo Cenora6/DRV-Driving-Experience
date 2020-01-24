@@ -4,6 +4,7 @@ import firebase from "../../firebase/firebase";
 import errorIcon from "../../../assets/error.png";
 import ReactTooltip from "react-tooltip";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import {NavLink} from "react-router-dom";
 
 class WeeklyTips extends Component {
     state = {
@@ -61,7 +62,9 @@ class WeeklyTips extends Component {
                             quis interdum nunc rutrum.
                         </p>
                         <div className='tips__week__description__button'>
-                            <button className='buttons__small'>Take the test</button>
+                            <NavLink to={'/test'}>
+                                <button className='buttons__small'>Take the test</button>
+                            </NavLink>
                         </div>
                         <ul className='tips__week__description__tags'>
                             <li>
@@ -102,7 +105,7 @@ class WeeklyTips extends Component {
                             <span>The question should have at least 100 characters!</span>
                         </ReactTooltip>
                     </>}
-                    <span onClick={this.handleSubmit} className='buttons__small'>Send </span>
+                    <span onClick={this.handleSubmit} className='buttons__small'>Send</span>
                 </div>
             </>
         )
