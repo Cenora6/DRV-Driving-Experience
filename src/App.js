@@ -13,6 +13,7 @@ import PrivateRoute from "./components/Session/PrivateRoute"
 import { AuthProvider } from "./components/Session/AuthProvider";
 import Forum from "./components/Home/Forum";
 import MainTest from "./components/Home/Test/MainTest";
+import SingleTip from "./components/Home/Tips/SingleTip";
 
 class App extends Component {
 
@@ -34,6 +35,7 @@ class App extends Component {
                         <PrivateRoute exact path='/home' component={Home}/>
                         <PrivateRoute exact path='/forum' component={Forum}/>
                         <PrivateRoute exact path='/test' component={MainTest}/>
+                        <PrivateRoute exact path='/home/:tipId' component={SingleTip}/>
                     </AnimatedSwitch>
                 </Switch>
             </HashRouter>

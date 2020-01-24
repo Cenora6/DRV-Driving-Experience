@@ -48,6 +48,7 @@ class Login extends Component {
                     });
 
                     sessionStorage.setItem("user", `${authUser.user}`);
+                    console.log(firebase.auth().currentUser);
 
                     const {history} = this.props;
                     history.push("/home");

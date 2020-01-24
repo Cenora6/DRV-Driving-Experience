@@ -5,7 +5,6 @@ import {NavLink} from "react-router-dom";
 import errorIcon from './../../assets/error.png'
 import ReactTooltip from 'react-tooltip';
 import firebase from "./../firebase/firebase";
-import Header from "../Home/Header";
 
 class Register extends Component {
     state = {
@@ -45,7 +44,7 @@ class Register extends Component {
             password.length >= 6 &&
             passwordConfirm.length >= 6 &&
             passwordConfirm === password &&
-            login.length >= 6) {
+            login.length >= 3) {
 
             firebase
                 .auth()
@@ -87,6 +86,20 @@ class Register extends Component {
                     }
                 });
 
+
+            firebase.firestore().collection('users')
+                .add({
+                    login: login,
+                    email: email,
+                    points: 0,
+                }).then(function(docRef) {
+                console.log("Document written with ID: ", docRef.id);
+            })
+                .catch(function(error) {
+                    console.error("Error adding document: ", error);
+                });
+
+
             this.setState({
                 login: "",
                 email: "",
@@ -110,7 +123,7 @@ class Register extends Component {
                     errorEmail: true,
                 })
             }
-            if (login.length < 6) {
+            if (login.length < 3) {
                 this.setState({
                     errorLogin: true,
                 })
@@ -133,7 +146,7 @@ class Register extends Component {
                                 <img className='error__icon' src={errorIcon} alt='error'/>
                             </span>
                             <ReactTooltip className='error__class' id='error__login' type='error' delayHide={2000} effect='solid'>
-                                <span>Login should have more <br/> than 6 characters.</span>
+                                <span>Login should have at least <br/> 3 characters.</span>
                             </ReactTooltip>
                         </>
                         } Login</label>

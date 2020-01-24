@@ -4,6 +4,36 @@ import logo from "../../assets/logo.png";
 import {NavLink} from "react-router-dom";
 
 class Header extends Component {
+    state = {
+        userPoints: "",
+    };
+
+    componentDidMount() {
+        this.getPoints()
+    }
+
+    getPoints = () => {
+        const email = firebase.auth().currentUser.email;
+
+        firebase
+            .firestore()
+            .collection("users")
+            .where("email", "==", email )
+            .get()
+            .then(doc => {
+            const array = [];
+
+            doc.forEach(doc => {
+                const points = doc.data().points;
+                array.push(points);
+            });
+
+            this.setState({
+                userPoints: array,
+            })
+
+        });
+    };
 
     handleLogOut = () => {
         firebase
@@ -36,7 +66,7 @@ class Header extends Component {
                         <p className='header__user__name'>{user.displayName}</p>
                         <span className='header__user__desc'> profile |</span>
                         <span className='header__user__desc' onClick={this.handleLogOut}> logout</span>
-                        <p className='header__user__desc'>points 34</p>
+                        <p className='header__user__desc'>points {this.state.userPoints}</p>
                     </div>
                 </section>
                 <section className='links'>

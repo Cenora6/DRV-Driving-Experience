@@ -1,31 +1,49 @@
 import React, {Component} from 'react';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
-import tip4 from './../../../assets/article4.jpg'
-import tip5 from './../../../assets/article5.jpg'
-import tip6 from './../../../assets/article6.jpg'
+import tips from './../../Database/tips'
 
 class PopularTips extends Component {
+    state = {
+        popular: [],
+    };
+
+    handleClick = (e) => {
+        //console.log("click", e.target.index)
+        console.log(e.target.id)
+    };
+
+    componentDidMount() {
+        for (let i = 0; i < tips.tips.length; i++) {
+            const singleTip = tips.tips;
+
+            singleTip.sort( (a, b) => {
+                return b.likes - a.likes;
+            });
+            const popularTip = [ singleTip[0], singleTip[1], singleTip[2] ];
+
+            this.setState({
+                popular: popularTip,
+            })
+        }
+    }
 
     render() {
-
+        const {popular} = this.state;
         return (
             <>
                 <div className='tips__newest__popular'>
                     <h2>Popular Tips</h2>
                     <Carousel showThumbs={false} infiniteLoop showStatus={false} transitionTime={1000} centerMode>
-                        <div>
-                            <h3>Safety tips for truck drivers [20]</h3>
-                            <img alt="tip4" src={tip4} />
-                        </div>
-                        <div>
-                            <h3>Aggressive driving and road rage [04]</h3>
-                            <img alt="tip5" src={tip5} />
-                        </div>
-                        <div>
-                            <h3>Winter driving preparedness [11]</h3>
-                            <img alt="tip6" src={tip6} />
-                        </div>
+
+                        {popular.map( (tip, index) => {
+                            return (
+                                <div key={index} id={tip.id} onClick={this.handleClick}>
+                                    <h3>{tip.title}</h3>
+                                    <img alt="tip4" src={tip.photovideo} />
+                                </div>
+                            )
+                        })}
                     </Carousel>
                 </div>
             </>

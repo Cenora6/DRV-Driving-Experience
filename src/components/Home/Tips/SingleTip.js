@@ -7,7 +7,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import {NavLink} from "react-router-dom";
 import tips from "../../Database/tips";
 
-class WeeklyTips extends Component {
+class SingleTip extends Component {
     state = {
         question: "",
         questionError: false,
@@ -49,12 +49,13 @@ class WeeklyTips extends Component {
             this.setState({
                 randomTip: random,
             })
-        }, 604800000);
+        }, 604800);
     };
 
     render() {
         const { randomTip } = this.state;
         const weeklyTip = tips.tips[randomTip];
+        console.log(weeklyTip.added);
         return (
             <>
                 <div className='tips__week'>
@@ -120,4 +121,4 @@ class WeeklyTips extends Component {
     }
 }
 
-export default WeeklyTips;
+export default SingleTip;
