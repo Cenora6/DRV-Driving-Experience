@@ -2,15 +2,11 @@ import React, {Component} from 'react';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
 import tips from './../../Database/tips'
+import {NavLink} from "react-router-dom";
 
 class PopularTips extends Component {
     state = {
         popular: [],
-    };
-
-    handleClick = (e) => {
-        //console.log("click", e.target.index)
-        console.log(e.target.id)
     };
 
     componentDidMount() {
@@ -30,6 +26,9 @@ class PopularTips extends Component {
 
     render() {
         const {popular} = this.state;
+        const style = {
+            textDecoration: "none"
+        };
         return (
             <>
                 <div className='tips__newest__popular'>
@@ -38,10 +37,12 @@ class PopularTips extends Component {
 
                         {popular.map( (tip, index) => {
                             return (
-                                <div key={index} id={tip.id} onClick={this.handleClick}>
-                                    <h3>{tip.title}</h3>
-                                    <img alt="tip4" src={tip.photovideo} />
-                                </div>
+                                <NavLink to={`/tips/${tip.id}`} style={style} key={index} >
+                                    <div id={tip.id}>
+                                        <h3>{tip.title}</h3>
+                                        <img alt="tip4" src={tip.photovideo} />
+                                    </div>
+                                </NavLink>
                             )
                         })}
                     </Carousel>

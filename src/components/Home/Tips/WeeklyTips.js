@@ -57,7 +57,7 @@ class WeeklyTips extends Component {
         const weeklyTip = tips.tips[randomTip];
         return (
             <>
-                <div className='tips__week'>
+                <div className='tips__week' key={weeklyTip.id}>
                     <div className='tips__week__title'>
                         <h2>Weekly Tip</h2>
                         <span>{weeklyTip.added}</span>

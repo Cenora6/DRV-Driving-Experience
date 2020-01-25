@@ -20,6 +20,37 @@
   border: none;
   text-transform: uppercase;
   font-weight: 500;
+  transition: opacity .15s ease-in-out;
+
+  &:hover {
+    zoom: 1;
+    filter: alpha(opacity=50);
+    opacity: 0.5;
+  }
+}
+
+.buttons__big {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-family: $font-base;
+  color: $mainTextColor;
+  background-color: transparent;
+  border: none;
+  text-transform: uppercase;
+  font-weight: 500;
+  transition: opacity .15s ease-in-out;
+
+  i {
+    vertical-align: sub;
+    margin-right: 0.5rem;
+    font-size: 1.5rem;
+  }
+
+  &:hover {
+    zoom: 1;
+    filter: alpha(opacity=50);
+    opacity: 0.5;
+  }
 }
 
 .error__icon {

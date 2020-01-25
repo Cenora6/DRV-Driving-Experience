@@ -2,15 +2,11 @@ import React, {Component} from 'react';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
 import tips from './../../Database/tips'
+import {NavLink} from "react-router-dom";
 
 class NewestTips extends Component {
     state = {
         newestTips: [],
-    };
-
-    handleClick = (e) => {
-        //console.log("click", e.target.index)
-        console.log(e.target.id)
     };
 
     componentDidMount() {
@@ -29,6 +25,9 @@ class NewestTips extends Component {
     }
 
     render() {
+        const style = {
+            textDecoration: "none"
+        };
         const { newestTips } = this.state;
         return (
             <>
@@ -36,13 +35,15 @@ class NewestTips extends Component {
                     <h2>Newest Tips</h2>
                     <Carousel showThumbs={false} infiniteLoop showStatus={false} transitionTime={1000} centerMode>
                         {newestTips.map((tip, index) => {
-                            return (
-                                <div key={index} id={tip.id} onClick={this.handleClick}>
-                                    <h3>{tip.title}</h3>
-                                    <img alt="tip1" src={tip.photovideo} />
-                                </div>
-                            )
-                        }
+                                return (
+                                    <NavLink to={`/tips/${tip.id}`} style={style} key={index}>
+                                        <div id={tip.id}>
+                                            <h3>{tip.title}</h3>
+                                            <img alt="tip1" src={tip.photovideo} id={tip.id} />
+                                        </div>
+                                    </NavLink>
+                                )
+                            }
                         )}
                     </Carousel>
                 </div>

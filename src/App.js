@@ -13,12 +13,11 @@ import PrivateRoute from "./components/Session/PrivateRoute"
 import { AuthProvider } from "./components/Session/AuthProvider";
 import Forum from "./components/Home/Forum";
 import MainTest from "./components/Home/Test/MainTest";
-import SingleTip from "./components/Home/Tips/SingleTip";
+import AllTips from "./components/Home/Tips/AllTips";
 
 class App extends Component {
 
     render() {
-
         return (
             <AuthProvider>
             <HashRouter>
@@ -35,7 +34,7 @@ class App extends Component {
                         <PrivateRoute exact path='/home' component={Home}/>
                         <PrivateRoute exact path='/forum' component={Forum}/>
                         <PrivateRoute exact path='/test' component={MainTest}/>
-                        <PrivateRoute exact path='/home/:tipId' component={SingleTip}/>
+                        <PrivateRoute path='/tips/:id' component={AllTips} />
                     </AnimatedSwitch>
                 </Switch>
             </HashRouter>
@@ -43,6 +42,5 @@ class App extends Component {
         );
     }
 }
-
 
 export default App;
