@@ -14,6 +14,7 @@ An app, where you can find some driving tips and take a quiz to check your drivi
 - [React Router Transition](https://www.npmjs.com/package/react-router-transition/)
 - [React Tooltip](https://www.npmjs.com/package/react-tooltip/)
 - [React Responsive Carousel](https://www.npmjs.com/package/react-responsive-carousel/)
+- [Read More React](https://www.npmjs.com/package/read-more-react/)
 
 ### Installation:
 
