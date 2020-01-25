@@ -26,7 +26,8 @@ class NewestTips extends Component {
 
     render() {
         const style = {
-            textDecoration: "none"
+            textDecoration: "none",
+            backgroundColor: "rgba(255, 255, 255, 0.5)",
         };
         const { newestTips } = this.state;
         return (
@@ -37,9 +38,9 @@ class NewestTips extends Component {
                         {newestTips.map((tip, index) => {
                                 return (
                                     <NavLink to={`/tips/${tip.id}`} style={style} key={index}>
-                                        <div id={tip.id}>
+                                        <div id={tip.id} className='animation2'>
                                             <h3>{tip.title}</h3>
-                                            <img alt="tip1" src={tip.photovideo} id={tip.id} />
+                                            <img alt="tip1" src={tip.photovideo} id={tip.id}/>
                                         </div>
                                     </NavLink>
                                 )

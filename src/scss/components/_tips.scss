@@ -17,7 +17,6 @@
     }
 
     &__description {
-
       img {
         width: 100%;
       }
@@ -104,6 +103,14 @@
     justify-content: center;
     align-items: center;
     margin: 2rem 0;
+
+    .slide {
+      background-color: $altTextColor;
+    }
+
+    .selected {
+      z-index: 200;
+    }
 
     div {
       background-color: $altTextColor;

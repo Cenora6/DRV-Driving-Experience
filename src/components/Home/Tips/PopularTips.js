@@ -37,8 +37,8 @@ class PopularTips extends Component {
 
                         {popular.map( (tip, index) => {
                             return (
-                                <NavLink to={`/tips/${tip.id}`} style={style} key={index} >
-                                    <div id={tip.id}>
+                                <NavLink to={`/tips/${tip.id}`} style={style} key={index}>
+                                    <div id={tip.id} className='animation2'>
                                         <h3>{tip.title}</h3>
                                         <img alt="tip4" src={tip.photovideo} />
                                     </div>

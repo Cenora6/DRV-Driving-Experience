@@ -19,6 +19,10 @@ function AllTips( {match} ) {
         left: "1rem",
     };
 
+    const linkStyle = {
+        textDecoration: "none",
+    };
+
     return (
         <>
             <Header/>
@@ -40,11 +44,12 @@ function AllTips( {match} ) {
                         <li>
                             <i className="fas fa-tags"></i>
                         </li>
-
                         {tip.tags.map( (tag, index) => {
                             return(
                                 <>
-                                    <li key={index}>{tag}</li>
+                                    <NavLink to={`/tags/${tag}`} key={index} style={linkStyle} className='animation'>
+                                        <li>{tag}</li>
+                                    </NavLink>
                                     <li>|</li>
                                 </>
                             )

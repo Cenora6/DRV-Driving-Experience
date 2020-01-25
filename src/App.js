@@ -14,6 +14,7 @@ import { AuthProvider } from "./components/Session/AuthProvider";
 import Forum from "./components/Home/Forum";
 import MainTest from "./components/Home/Test/MainTest";
 import AllTips from "./components/Home/Tips/AllTips";
+import Tags from "./components/Home/Tags/Tags";
 
 class App extends Component {
 
@@ -35,6 +36,7 @@ class App extends Component {
                         <PrivateRoute exact path='/forum' component={Forum}/>
                         <PrivateRoute exact path='/test' component={MainTest}/>
                         <PrivateRoute path='/tips/:id' component={AllTips} />
+                        <PrivateRoute path='/tags/:id' component={Tags} />
                     </AnimatedSwitch>
                 </Switch>
             </HashRouter>

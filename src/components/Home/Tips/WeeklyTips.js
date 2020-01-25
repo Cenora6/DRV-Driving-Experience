@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import tipPhoto from './../../../assets/weekly-tip.jpg'
 import firebase from "../../firebase/firebase";
 import errorIcon from "../../../assets/error.png";
 import ReactTooltip from "react-tooltip";
@@ -53,6 +52,9 @@ class WeeklyTips extends Component {
     };
 
     render() {
+        const linkStyle = {
+            textDecoration: "none",
+        };
         const { randomTip } = this.state;
         const weeklyTip = tips.tips[randomTip];
         return (
@@ -81,7 +83,9 @@ class WeeklyTips extends Component {
                             {weeklyTip.tags.map( (tag, index) => {
                                 return(
                                     <>
-                                        <li key={index}>{tag}</li>
+                                        <NavLink to={`/tags/${tag}`} key={index} style={linkStyle}>
+                                            <li key={index} className='animation'>{tag}</li>
+                                        </NavLink>
                                         <li>|</li>
                                     </>
                                 )
@@ -113,7 +117,7 @@ class WeeklyTips extends Component {
                             <span>The question should have at least 100 characters!</span>
                         </ReactTooltip>
                     </>}
-                    <span onClick={this.handleSubmit} className='buttons__small'>Send</span>
+                    <button onClick={this.handleSubmit} className='buttons__small'>Send</button>
                 </div>
             </>
         )
