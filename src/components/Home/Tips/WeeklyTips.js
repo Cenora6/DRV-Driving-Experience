@@ -134,7 +134,7 @@ class WeeklyTips extends Component {
                             {weeklyTip.description}
                         </p>
                         <div className='tips__week__description__button'>
-                            <NavLink to={'/test'}>
+                            <NavLink to={`/test/${weeklyTip.id}`}>
                                 <button className='buttons__small'>Take the test</button>
                             </NavLink>
                         </div>

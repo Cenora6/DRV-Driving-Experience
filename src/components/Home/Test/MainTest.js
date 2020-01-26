@@ -1,10 +1,8 @@
 import React, {Component} from 'react';
 import Header from "../Header";
 import WelcomeFooter from "../../Welcome/WelcomeFooter";
-import tip1 from './../../../assets/article1.jpg'
-import tip2 from './../../../assets/article2.jpg'
-import tip3 from './../../../assets/article3.jpg'
 import ResultTest from "./ResultTest";
+import tips from "../../Database/tips";
 
 class QuestionsTest extends Component {
     state = {
@@ -18,6 +16,9 @@ class QuestionsTest extends Component {
     };
 
     render() {
+        const i = this.props.match.params.id.toString();
+        const tip = tips.tips[i - 1];
+        const test = tip.test;
         return (
             <>
                 <Header/>
@@ -26,44 +27,39 @@ class QuestionsTest extends Component {
                     <div className='test__title'>
                         <h2>Training</h2>
                     </div>
-                    <h3>Safe engine braking [54]</h3>
+                    <h3>{tip.title}</h3>
                     <p className='test__instructions'>Answer the following questions. In every question there is only one possible answer</p>
                     <div className='test__questions'>
                         <div className='test__questions__single'>
-                            <h4>1. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas?</h4>
+                            <h4>{test[0].question}</h4>
                             <ul className='test__questions__single__text'>
                                 <li className='radio'>
                                     <input type='radio' id='1A' name='question1'/>
-                                    <label htmlFor='1A'><span>A.</span>Aliquam augue nunc, sagittis non sagittis sit amet, mollis eget augue.
-                                        Vivamus quis elementum metus.</label>
+                                    <label htmlFor='1A'><span>A.</span>{test[0].answer1}</label>
                                     <div className="check"></div>
                                 </li>
                                 <li className='radio'>
                                     <input type='radio' id='1B' name='question1'/>
                                     <div className="check"></div>
-                                    <label htmlFor='1B'><span>B.</span>Phasellus nec finibus nisi. Duis et ullamcorper arcu. Proin id dolor
-                                        eu tellus commodo malesuada eget et sapien.
-                                    </label>
+                                    <label htmlFor='1B'><span>B.</span>{test[0].answer2}</label>
                                 </li>
                                 <li className='radio'>
                                     <input type='radio' id='1C' name='question1'/>
                                     <div className="check"></div>
-                                    <label htmlFor='1C'><span>C.</span> Sed consequat consequat turpis ac luctus. Vivamus in diam in ligula
-                                        tempor consectetur.</label>
+                                    <label htmlFor='1C'><span>C.</span>{test[0].answer3}</label>
                                 </li>
                             </ul>
                         </div>
                         <div className='test__questions__single'>
-                            <h4>2. Integer id turpis elementum, pulvinar sem ac, egestas turpis?</h4>
+                            <h4>{test[1].question}</h4>
                             <ul className='test__questions__single__photos'>
                                 <li className='radio'>
                                     <input type='radio' id='2A' name='question2'/>
                                     <label htmlFor='2A'>
                                         <div className='image'>
-                                            <img src={tip1} alt='quiz'/>
+                                            <img src={test[1].answer1[1]} alt='quiz'/>
                                         </div>
-                                        <span>A.</span>Aliquam augue nunc, sagittis non sagittis sit amet, mollis eget augue.
-                                        Vivamus quis elementum metus.
+                                        <span>A.</span>{test[1].answer1[0]}
                                     </label>
                                     <div className="check"></div>
                                 </li>
@@ -72,10 +68,9 @@ class QuestionsTest extends Component {
                                     <div className="check"></div>
                                     <label htmlFor='2B'>
                                         <div className='image'>
-                                            <img src={tip2} alt='quiz'/>
+                                            <img src={test[1].answer2[1]} alt='quiz'/>
                                         </div>
-                                        <span>B.</span>Phasellus nec finibus nisi. Duis et ullamcorper arcu. Proin id dolor
-                                        eu tellus commodo malesuada eget et sapien.
+                                        <span>B.</span>{test[1].answer2[0]}
 
                                     </label>
                                 </li>
@@ -84,15 +79,34 @@ class QuestionsTest extends Component {
                                     <div className="check"></div>
                                     <label htmlFor='2C'>
                                         <div className='image'>
-                                            <img src={tip3} alt='quiz'/>
+                                            <img src={test[1].answer3[1]} alt='quiz'/>
                                         </div>
-                                        <span>C.</span> Sed consequat consequat turpis ac luctus. Vivamus in diam in ligula
-                                        tempor consectetur.
+                                        <span>C.</span>{test[1].answer3[0]}
                                     </label>
                                 </li>
                             </ul>
                         </div>
-
+                        <div className='test__questions__single'>
+                            <h4>{test[2].question}</h4>
+                            <ul className='test__questions__single__text'>
+                                <li className='radio'>
+                                    <input type='radio' id='3A' name='question3'/>
+                                    <label htmlFor='3A'><span>A.</span>{test[2].answer1}</label>
+                                    <div className="check"></div>
+                                </li>
+                                <li className='radio'>
+                                    <input type='radio' id='3B' name='question3'/>
+                                    <div className="check"></div>
+                                    <label htmlFor='3B'><span>B.</span>{test[2].answer2}
+                                    </label>
+                                </li>
+                                <li className='radio'>
+                                    <input type='radio' id='3C' name='question3'/>
+                                    <div className="check"></div>
+                                    <label htmlFor='3C'><span>C.</span>{test[2].answer3}</label>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                     <div className='test__button'>
                         <button className='buttons__small' onClick={this.handleQuiz}>Finish</button>

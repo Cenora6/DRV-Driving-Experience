@@ -34,7 +34,7 @@ class App extends Component {
                         <Route exact path='/register' component={Register}/>
                         <PrivateRoute exact path='/home' component={Home}/>
                         <PrivateRoute exact path='/forum' component={Forum}/>
-                        <PrivateRoute exact path='/test' component={MainTest}/>
+                        <PrivateRoute exact path='/test/:id' component={MainTest}/>
                         <PrivateRoute path='/tips/:id' component={AllTips} />
                         <PrivateRoute path='/tags/:id' component={Tags} />
                     </AnimatedSwitch>
