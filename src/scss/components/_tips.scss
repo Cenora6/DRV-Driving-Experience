@@ -42,6 +42,7 @@
 
         i {
           margin-left: 1rem;
+          vertical-align: middle;
         }
 
         li {
@@ -63,9 +64,10 @@
         border-bottom: 1px solid $mainTextColor;
 
         i {
+          cursor: pointer;
           font-size: 2rem;
           margin-right: 1rem;
-          vertical-align: sub;
+          vertical-align: middle;
         }
       }
     }

@@ -5,12 +5,23 @@ import ReactTooltip from "react-tooltip";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import {NavLink} from "react-router-dom";
 import tips from "../../Database/tips";
+import {
+    FacebookShareCount,
+    TwitterShareButton,
+    FacebookShareButton,
+    LinkedinShareButton,
+} from "react-share";
 
 class WeeklyTips extends Component {
     state = {
         question: "",
         questionError: false,
         randomTip: 0,
+        shareWindow: false,
+        shareCount: 0,
+        likeCount: 0,
+        clicked: false,
+        clickedShare: false,
     };
 
     componentDidMount() {
@@ -24,7 +35,6 @@ class WeeklyTips extends Component {
     };
 
     handleSubmit = (e) => {
-
         const user = firebase.auth().currentUser.displayName;
         e.preventDefault();
         const { question } = this.state;
@@ -43,20 +53,73 @@ class WeeklyTips extends Component {
     };
 
     generateWeeklyTip = () => {
-        setInterval( () => {
-            const random = Math.floor(Math.random() * (tips.tips.length));
+        const current_date = new Date();
+        const cday = current_date.getDay();
+        const hour = current_date.getHours();
+        const minute = current_date.getMinutes();
+        const seconds = current_date.getSeconds();
+        if (cday === 0 &
+            hour === 12 &
+            minute === 0 &
+            seconds === 0) {
             this.setState({
-                randomTip: random,
+                randomTip: Math.floor(Math.random() * (tips.tips.length)),
             })
-        }, 604800000);
+        }
+    };
+
+    handleShare = (e) => {
+        e.preventDefault();
+
+        if (this.state.clickedShare === false) {
+            this.setState({
+                shareCount: this.state.shareCount + 1,
+                shareWindow: !this.state.shareWindow,
+                clickedShare: true,
+            });
+        } else {
+            this.setState({
+                shareCount: this.state.shareCount - 1,
+                clickedShare: false,
+            });
+        }
+    };
+
+    handleClose = (e) => {
+        e.preventDefault();
+        this.setState({
+            shareWindow: !this.state.shareWindow,
+        });
+    };
+
+    handleLike = (e) => {
+        e.preventDefault();
+
+        if (this.state.clicked === false) {
+            this.setState({
+                likeCount: this.state.likeCount + 1,
+                clicked: true,
+            });
+
+        } else {
+            this.setState({
+                likeCount: this.state.likeCount - 1,
+                clicked: false,
+            });
+        }
     };
 
     render() {
+        const clicked = {color: "#663FB6", fontSize: "2.5rem"};
+        const shareUrl = 'https://github.com/Cenora6';
+        const title = 'Visit Cenora6 on Github';
         const linkStyle = {
             textDecoration: "none",
         };
         const { randomTip } = this.state;
         const weeklyTip = tips.tips[randomTip];
+        const shares = parseInt(weeklyTip.share) + parseInt(this.state.shareCount);
+        const likes = parseInt(weeklyTip.likes) + parseInt(this.state.likeCount);
         return (
             <>
                 <div className='tips__week' key={weeklyTip.id}>
@@ -93,13 +156,46 @@ class WeeklyTips extends Component {
                         </ul>
                         <div className='tips__week__description__sharing'>
                             <div className='tips__week__description__sharing__likes'>
-                                <i className="fas fa-thumbs-up"></i>
-                                <span>{weeklyTip.likes}</span>
+                                <i className="fas fa-thumbs-up animation" style={this.state.clicked ? clicked : null}
+                                   onClick={this.handleLike}></i>
+                                <span>{likes}</span>
                             </div>
                             <div className='tips__week__description__sharing__share'>
-                                <i className="fas fa-share-alt"></i>
-                                <span>{weeklyTip.share}</span>
+                                <i className="fas fa-share-alt animation"  style={this.state.clickedShare ? clicked : null}
+                                   onClick={this.handleShare}></i>
+                                <span>{shares}</span>
                             </div>
+                            {this.state.shareWindow &&
+                            <div className='shares'>
+                                <h4>Click one of the platforms to share the post:</h4>
+                                <div className='shares__icons'>
+                                    <div className='facebook animation'>
+                                        <FacebookShareButton
+                                            url={shareUrl}
+                                            quote={title}>
+                                            <i className="fab fa-facebook-square"></i>
+                                        </FacebookShareButton>
+                                        <FacebookShareCount url={shareUrl}>
+                                            {shareCount => <span>{shareCount}</span>}
+                                        </FacebookShareCount>
+                                    </div>
+                                    <div className='twitter animation'>
+                                        <TwitterShareButton
+                                            url={shareUrl}
+                                            title={title}>
+                                            <i className="fab fa-twitter-square"></i>
+                                        </TwitterShareButton>
+                                    </div>
+                                    <div className='linkedin animation'>
+                                        <LinkedinShareButton
+                                            url={shareUrl}
+                                            title={title}>
+                                            <i className="fab fa-linkedin"></i>
+                                        </LinkedinShareButton>
+                                    </div>
+                                </div>
+                                <button className='buttons__small' onClick={this.handleClose}>Close the window</button>
+                            </div>}
                         </div>
                     </div>
                 </div>

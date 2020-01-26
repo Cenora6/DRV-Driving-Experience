@@ -18,9 +18,9 @@ class ResultTest extends Component {
                 <div className='result__share'>
                     <p>Share your result:</p>
                     <div className='result__share__media'>
-                        <i className="fab fa-facebook-square"></i>
-                        <i className="fab fa-instagram"></i>
-                        <i className="fab fa-linkedin"></i>
+                        <i className="fab fa-facebook-square animation"></i>
+                        <i className="fab fa-instagram animation"></i>
+                        <i className="fab fa-linkedin animation"></i>
                     </div>
                 </div>
                 <NavLink to={'/home'} style={linkStyle} className='buttons__small'>Close the window and go back to TIPS</NavLink>

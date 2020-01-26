@@ -43,7 +43,7 @@ function Tags( {match} ) {
 
             {array.map( (tip, index) => {
                 return (
-                    <section className='tips'>
+                    <section className='tips' key={index}>
                         <div className='tips__single'>
                             <NavLink to={`/tips/${tip.id}`} style={style} key={index}>
                                 <div className='tips__single__description animation'>
