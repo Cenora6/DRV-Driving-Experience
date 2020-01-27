@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import firebase from "../../firebase/firebase";
-import errorIcon from "../../../assets/error.png";
 import ReactTooltip from "react-tooltip";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import {NavLink} from "react-router-dom";
@@ -22,6 +21,7 @@ class WeeklyTips extends Component {
         likeCount: 0,
         clicked: false,
         clickedShare: false,
+        date: [new Date().getDate() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getFullYear()],
     };
 
     componentDidMount() {
@@ -35,16 +35,33 @@ class WeeklyTips extends Component {
     };
 
     handleSubmit = (e) => {
-        const user = firebase.auth().currentUser.displayName;
         e.preventDefault();
-        const { question } = this.state;
+        const { question, date,randomTip } = this.state;
+        const weeklyTip = tips.tips[randomTip];
 
         if (question.length > 100) {
+            firebase
+                .firestore()
+                .collection(`asks`)
+                .add({
+                    date: date.toString(),
+                    tip: weeklyTip.title,
+                    email: firebase.auth().currentUser.email,
+                    login: firebase.auth().currentUser.displayName,
+                    question: this.state.question,
+                    answer: [],
+                }).then(function(docRef) {
+                console.log("Document written with ID: ", docRef.id);
+            })
+                .catch(function(error) {
+                    console.error("Error adding document: ", error);
+                });
+
             this.setState({
                 question: "",
                 questionError: false,
             });
-            console.log(user, question);
+
         } else {
             this.setState({
                 questionError: true,
@@ -52,8 +69,7 @@ class WeeklyTips extends Component {
         }
     };
 
-    generateWeeklyTip = (e) => {
-        e.preventDefault()
+    generateWeeklyTip = () => {
         const cday = new Date().getDay();
         const hour = new Date().getHours();
         const minutes = new Date().getMinutes();
@@ -201,16 +217,15 @@ class WeeklyTips extends Component {
                     <textarea value={this.state.question} onChange={this.handleChange}></textarea>
                 </form>
                 <div className='tips__button'>
-                    {this.state.questionError &&
-                    <>
+                    {this.state.questionError ?
+                        <>
                             <span data-for='error__email' data-tip="">
-                                <img className='error__icon' src={errorIcon} alt='error'/>
+                                <button onClick={this.handleSubmit} className='buttons__small'>Send</button>
                             </span>
-                        <ReactTooltip className='error__class' id='error__email' type='error' delayHide={2000} effect='solid'>
-                            <span>The question should have at least 100 characters!</span>
-                        </ReactTooltip>
-                    </>}
-                    <button onClick={this.handleSubmit} className='buttons__small'>Send</button>
+                            <ReactTooltip className='error__class' id='error__email' type='error' delayHide={2000} effect='solid'>
+                                <span>The question should have at least 100 characters!</span>
+                            </ReactTooltip>
+                        </> : <button onClick={this.handleSubmit} className='buttons__small'>Send</button>}
                 </div>
             </>
         )

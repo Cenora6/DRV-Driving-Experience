@@ -5,6 +5,8 @@ import Header from "../Header";
 import WelcomeFooter from "../../Welcome/WelcomeFooter";
 import {FacebookShareButton, LinkedinShareButton, TwitterShareButton} from "react-share";
 import ResultTest from "../Test/ResultTest";
+import ReactTooltip from "react-tooltip";
+import firebase from "../../firebase/firebase";
 
 export default class AllTips extends Component {
     state = {
@@ -18,6 +20,9 @@ export default class AllTips extends Component {
         chosenAnswer2: "",
         chosenAnswer3: "",
         totalPoints: 0,
+        question: "",
+        questionError: false,
+        date: [new Date().getDate() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getFullYear()],
     };
 
     checkAnswer1 = (e) => {
@@ -114,6 +119,48 @@ export default class AllTips extends Component {
                 likeCount: this.state.likeCount - 1,
                 clicked: false,
             });
+        }
+    };
+
+    handleChange = (e) => {
+        this.setState({
+            question: e.target.value,
+        })
+    };
+
+    handleSubmit = (e) => {
+        e.preventDefault();
+        const { question, date } = this.state;
+        const i = this.props.match.params.id.toString();
+        const weeklyTip = tips.tips[i - 1];
+
+        if (question.length > 100) {
+            firebase
+                .firestore()
+                .collection(`asks`)
+                .add({
+                    date: date.toString(),
+                    tip: weeklyTip.title,
+                    email: firebase.auth().currentUser.email,
+                    login: firebase.auth().currentUser.displayName,
+                    question: this.state.question,
+                    answer: [],
+                }).then(function(docRef) {
+                console.log("Document written with ID: ", docRef.id);
+            })
+                .catch(function(error) {
+                    console.error("Error adding document: ", error);
+                });
+
+            this.setState({
+                question: "",
+                questionError: false,
+            });
+
+        } else {
+            this.setState({
+                questionError: true,
+            })
         }
     };
 
@@ -215,6 +262,21 @@ export default class AllTips extends Component {
                             </div>}
                         </div>
                     </div>
+                </div>
+                <form className='tips__questions'>
+                    <span>Ask question</span>
+                    <textarea value={this.state.question} onChange={this.handleChange}></textarea>
+                </form>
+                <div className='tips__button'>
+                    {this.state.questionError ?
+                        <>
+                            <span data-for='error__email' data-tip="">
+                                <button onClick={this.handleSubmit} className='buttons__small'>Send</button>
+                            </span>
+                            <ReactTooltip className='error__class' id='error__email' type='error' delayHide={2000} effect='solid'>
+                                <span>The question should have at least 100 characters!</span>
+                            </ReactTooltip>
+                        </> : <button onClick={this.handleSubmit} className='buttons__small'>Send</button>}
                 </div>
                 <section className='test'>
                     {this.state.result && <ResultTest totalPoints={this.state.totalPoints}/>}

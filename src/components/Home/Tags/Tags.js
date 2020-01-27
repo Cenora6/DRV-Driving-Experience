@@ -52,9 +52,9 @@ function Tags( {match} ) {
                                         <h3>{tip.title}</h3>
                                         <ReadMoreReact text={`${tip.description}`}
                                                        readMoreText="< read more >"
-                                                       min={200}
-                                                       ideal={230}
-                                                       max={100000}/>
+                                                       min={150}
+                                                       ideal={180}
+                                                       max={300}/>
                                     </div>
                                 </div>
                             </NavLink>

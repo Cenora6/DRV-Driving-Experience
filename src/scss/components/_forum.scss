@@ -1,0 +1,45 @@
+.forum {
+
+  &__asks {
+    display: flex;
+    flex-direction: column;
+
+    h2 {
+      text-align: center;
+      margin: 1rem;
+      width: 100%;
+    }
+
+    &__header {
+      display: flex;
+      li {
+        width: 100%;
+        padding: 1rem;
+        background-color: $tipsHeaderBackground;
+        color: $altTextColor;
+      }
+    }
+
+    &__single {
+      display: flex;
+      flex-direction: column;
+      margin: 0.5rem 0;
+
+      &:nth-child(even) {
+        background-color: $headerTextColor;
+      }
+
+      &:nth-child(odd) {
+        background-color: $forumMenu;
+      }
+
+      .title {
+        font-weight: 700;
+      }
+
+      .data {
+        font-weight: 300;
+      }
+    }
+  }
+}

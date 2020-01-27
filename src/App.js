@@ -11,10 +11,11 @@ import { AnimatedSwitch } from 'react-router-transition';
 import Home from "./components/Home/Home";
 import PrivateRoute from "./components/Session/PrivateRoute"
 import { AuthProvider } from "./components/Session/AuthProvider";
-import Forum from "./components/Home/Forum";
+import Forum from "./components/Home/Forum/Forum";
 import MainTest from "./components/Home/Test/MainTest";
 import AllTips from "./components/Home/Tips/AllTips";
 import Tags from "./components/Home/Tags/Tags";
+import SingleAsk from "./components/Home/Forum/SingleAsk";
 
 class App extends Component {
 
@@ -37,6 +38,7 @@ class App extends Component {
                         <PrivateRoute exact path='/test/:id' component={MainTest}/>
                         <PrivateRoute path='/tips/:id' component={AllTips} />
                         <PrivateRoute path='/tags/:id' component={Tags} />
+                        <PrivateRoute path='/asks/:id' component={SingleAsk} />
                     </AnimatedSwitch>
                 </Switch>
             </HashRouter>

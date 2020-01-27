@@ -33,8 +33,8 @@ class QuestionsTest extends Component {
         });
     };
 
-    handleQuiz = () => {
-
+    handleQuiz = (e) => {
+        e.preventDefault()
         this.setState({
             answerError: false,
         });
