@@ -1,6 +1,11 @@
 import React, {Component} from 'react';
 import firebase from "../../firebase/firebase";
 import {NavLink} from "react-router-dom";
+import {
+    TwitterShareButton,
+    FacebookShareButton,
+    LinkedinShareButton, FacebookShareCount,
+} from "react-share";
 
 class ResultTest extends Component {
     state = {
@@ -10,7 +15,7 @@ class ResultTest extends Component {
     };
 
     componentDidMount() {
-        this.getPoints()
+        this.getPoints();
     }
 
     getPoints = () => {
@@ -41,11 +46,12 @@ class ResultTest extends Component {
     };
 
     savePoints = () => {
+        const pointsSum = parseInt(this.state.userPoints) + parseInt(this.props.totalPoints);
         const uid = this.state.uid.toString();
         firebase.firestore().collection('users')
             .doc(uid)
             .update({
-                points: this.props.totalPoints,
+                points: pointsSum,
             }).then(function(docRef) {
             console.log("Document successfully updated!");
         })
@@ -60,6 +66,8 @@ class ResultTest extends Component {
         };
         const user = firebase.auth().currentUser;
         const pointsSum = parseInt(this.state.userPoints) + parseInt(this.props.totalPoints);
+        const shareUrl = 'https://github.com/Cenora6';
+        const title = 'Visit Cenora6 on Github';
 
         return (
             <div className='result'>
@@ -69,9 +77,30 @@ class ResultTest extends Component {
                 <div className='result__share'>
                     <p>Share your result:</p>
                     <div className='result__share__media'>
-                        <i className="fab fa-facebook-square animation"></i>
-                        <i className="fab fa-instagram animation"></i>
-                        <i className="fab fa-linkedin animation"></i>
+                        <div className='facebook animation'>
+                            <FacebookShareButton
+                                url={shareUrl}
+                                quote={title}>
+                                <i className="fab fa-facebook-square"></i>
+                            </FacebookShareButton>
+                            <FacebookShareCount url={shareUrl}>
+                                {shareCount => <span>{shareCount}</span>}
+                            </FacebookShareCount>
+                        </div>
+                        <div className='twitter animation'>
+                            <TwitterShareButton
+                                url={shareUrl}
+                                title={title}>
+                                <i className="fab fa-twitter-square"></i>
+                            </TwitterShareButton>
+                        </div>
+                        <div className='linkedin animation'>
+                            <LinkedinShareButton
+                                url={shareUrl}
+                                title={title}>
+                                <i className="fab fa-linkedin"></i>
+                            </LinkedinShareButton>
+                        </div>
                     </div>
                 </div>
                 <span onClick={this.savePoints}>

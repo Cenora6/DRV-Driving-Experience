@@ -52,16 +52,13 @@ class WeeklyTips extends Component {
         }
     };
 
-    generateWeeklyTip = () => {
-        const current_date = new Date();
-        const cday = current_date.getDay();
-        const hour = current_date.getHours();
-        const minute = current_date.getMinutes();
-        const seconds = current_date.getSeconds();
-        if (cday === 0 &
-            hour === 12 &
-            minute === 0 &
-            seconds === 0) {
+    generateWeeklyTip = (e) => {
+        e.preventDefault()
+        const cday = new Date().getDay();
+        const hour = new Date().getHours();
+        const minutes = new Date().getMinutes();
+        const seconds = new Date().getSeconds();
+        if (cday === 1 && hour === 0 && minutes === 0 && seconds === 0) {
             this.setState({
                 randomTip: Math.floor(Math.random() * (tips.tips.length)),
             })

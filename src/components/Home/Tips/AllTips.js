@@ -1,5 +1,5 @@
 import {NavLink} from "react-router-dom";
-import React, {Component, isValidElement} from "react";
+import React, {Component} from "react";
 import tips from './../../Database/tips'
 import Header from "../Header";
 import WelcomeFooter from "../../Welcome/WelcomeFooter";
@@ -43,11 +43,9 @@ export default class AllTips extends Component {
         const correct1 = tips.tips[i - 1].test[0].correct;
         const correct2 = tips.tips[i - 1].test[1].correct;
         const correct3 = tips.tips[i - 1].test[2].correct;
-        const { chosenAnswer1, chosenAnswer2, chosenAnswer3, totalPoints } = this.state;
-        console.log("correct", correct1, correct2, correct3);
-        console.log("answers", chosenAnswer1, chosenAnswer2, chosenAnswer3);
+        const { chosenAnswer1, chosenAnswer2, chosenAnswer3 } = this.state;
         if (chosenAnswer1 === "" || chosenAnswer2 === "" || chosenAnswer3 === "") {
-            console.log("błąd!")
+            console.log("error!")
         } else {
 
             if(chosenAnswer1 === correct1) {
