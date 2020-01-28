@@ -16,6 +16,7 @@ An app, where you can find some driving tips and take a quiz to check your drivi
 - [React Responsive Carousel](https://www.npmjs.com/package/react-responsive-carousel/)
 - [Read More React](https://www.npmjs.com/package/read-more-react/)
 - [React Share](https://www.npmjs.com/package/react-share/)
+- [React Slidedown](https://www.npmjs.com/package/react-slidedown/)
 
 ### Installation:
 
