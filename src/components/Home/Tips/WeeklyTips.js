@@ -128,6 +128,7 @@ class WeeklyTips extends Component {
         const title = 'Visit Cenora6 on Github';
         const linkStyle = {
             textDecoration: "none",
+            color: "#D7D7D7",
         };
         const { randomTip } = this.state;
         const weeklyTip = tips.tips[randomTip];
@@ -158,12 +159,12 @@ class WeeklyTips extends Component {
 
                             {weeklyTip.tags.map( (tag, index) => {
                                 return(
-                                    <>
-                                        <NavLink to={`/tags/${tag}`} key={index} style={linkStyle}>
-                                            <li key={index} className='animation'>{tag}</li>
+                                    <li key={index}>
+                                        <NavLink to={`/tags/${tag}`} style={linkStyle}>
+                                            <span className='animation'>{tag}</span>
                                         </NavLink>
-                                        <li>|</li>
-                                    </>
+                                        <span> | </span>
+                                    </li>
                                 )
                             })}
                         </ul>

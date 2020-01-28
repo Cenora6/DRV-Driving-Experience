@@ -10,7 +10,7 @@ class Forum extends Component {
     };
 
     componentDidMount() {
-        this.handleAllAsks()
+        this.handleAllAsks();
     }
 
     handleAllAsks = () => {
@@ -18,16 +18,17 @@ class Forum extends Component {
             .firestore()
             .collection("asks")
             .get()
-            .then(doc => {
+            .then((doc) => {
                 const array = [];
 
-                doc.forEach(doc => {
+                doc.forEach((doc) => {
                     const data = doc.data();
                     array.push(data);
                 });
+                array.reverse();
                 this.setState({
                     questions: array,
-                })
+                });
             });
     };
 
@@ -41,20 +42,37 @@ class Forum extends Component {
                     <div className='forum__asks'>
                         <h2>Asks</h2>
                         <ul className='forum__asks__header'>
-                            <li>Title</li>
-                            <li>Description</li>
-                            <li>Posted</li>
+                            <li>
+                                Title
+                            </li>
+                            <li>
+                                Description
+                            </li>
+                            <li>
+                                Posted
+                            </li>
                         </ul>
                         {questions.map( (question, index) => {
                             return (
-                                <div className='forum__asks__single animation' key={index}>
-                                    <p className='title'>{question.tip}</p>
-                                    <ReadMoreReact text={`${question.question}`}
-                                                   readMoreText="< read more >"
-                                                   min={100}
-                                                   ideal={100}
-                                                   max={300}/>
-                                    <p className='data'>{question.login}, {question.date}</p>
+                                <div key={index}>
+                                    <div className='forum__asks__single'>
+                                        <p className='title'>{question.tip}</p>
+                                        <ReadMoreReact text={`${question.question}`}
+                                                       readMoreText="read more..."
+                                                       min={100}
+                                                       ideal={100}
+                                                       max={300}/>
+                                                       <div className='data'>
+                                                           <p>{question.login}</p>
+                                                           <p>{question.date}</p>
+                                                       </div>
+                                    </div>
+                                    <section className='forum__asks__answer'>
+                                        <i className="far fa-comment"></i>
+                                        <p> <span>Posted on: {question.answer[0]}</span> <br/>
+                                            {question.answer[1]}
+                                        </p>
+                                    </section>
                                 </div>
                             )
                         })}

@@ -14,31 +14,102 @@
       display: flex;
       li {
         width: 100%;
-        padding: 1rem;
+        padding: 1rem 2rem;
         background-color: $tipsHeaderBackground;
         color: $altTextColor;
+        display: flex;
+
+        &:first-of-type {
+          width: 25%;
+        }
+
+        &:nth-of-type(2) {
+          width: 60%;
+        }
+
+        &:last-of-type {
+          width: 10%;
+        }
+
+        .icons {
+          margin-left: 0.5rem;
+          display: flex;
+          flex-direction: column;
+          font-size: 1rem;
+          cursor: pointer;
+        }
       }
     }
 
     &__single {
       display: flex;
-      flex-direction: column;
       margin: 0.5rem 0;
+      padding: 1rem;
+      border-top: 0.1rem solid $mainTextColor;
 
-      &:nth-child(even) {
+      &:first-of-type {
+        border-top: none;
+      }
+
+      &:nth-of-type(even) {
         background-color: $headerTextColor;
       }
 
-      &:nth-child(odd) {
+      &:nth-of-type(odd) {
         background-color: $forumMenu;
       }
 
       .title {
         font-weight: 700;
+        width: 25%;
+        margin: 0 0.5rem;
+      }
+
+      .display-text-group {
+        width: 60%;
+        line-height: 1.3rem;
+      }
+
+      .read-more-button  {
+        font-size: 0.8rem;
+        font-weight: 400;
+        font-style: italic;
+        margin: 0.5rem 0;
+
+        &:hover {
+          cursor: pointer;
+        }
       }
 
       .data {
+        text-align: center;
+        width: 20%;
         font-weight: 300;
+        margin-left: 1rem;
+      }
+    }
+
+    &__answer {
+      font-weight: 700;
+      margin: 1rem;
+      display: flex;
+
+      i {
+        padding-top: 1rem;
+        font-size: 2rem;
+        width: 10%;
+      }
+
+      p {
+        margin: 0 1rem;
+        line-height: 1.2rem;
+
+        span {
+          margin-bottom: 1rem;
+          font-size: 0.8rem;
+          font-weight: 300;
+          font-style: italic;
+        }
       }
     }
   }
