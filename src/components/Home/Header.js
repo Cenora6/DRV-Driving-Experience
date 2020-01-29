@@ -56,6 +56,12 @@ class Header extends Component {
             cursor: "pointer",
         };
 
+        const profileLink = {
+            textDecoration: "none",
+            color: "#CAAAD2",
+            zIndex: 0,
+        };
+
         return (
             <>
                 <section className='header'>
@@ -63,7 +69,8 @@ class Header extends Component {
                     <img src={logo} alt={'driving'} className='header__logo'/>
                     <div className='header__user'>
                         <p className='header__user__name'>{user.displayName}</p>
-                        <span className='header__user__desc'> profile |</span>
+                        <NavLink style={profileLink} to='/profile'><span className='header__user__desc'> profile</span></NavLink>
+                        <span> | </span>
                         <span className='header__user__desc' onClick={this.handleLogOut}> logout</span>
                         <p className='header__user__desc'>points {this.state.userPoints}</p>
                     </div>

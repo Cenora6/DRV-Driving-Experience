@@ -1,0 +1,136 @@
+.profile {
+  display: flex;
+
+  input {
+    font-family: $font-base;
+    opacity: 0.7;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+  }
+
+  input[type=file] {
+    color: white;
+  }
+
+  .label {
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+
+  &__photo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 2rem;
+    width: 50%;
+
+    &__square {
+      width: 10rem;
+      height: 10rem;
+      background-color: $forumMenu;
+      border: 0.1rem solid $mainTextColor;
+    }
+
+    &__form {
+      margin: 1rem 0;
+      display: flex;
+      flex-direction: column;
+
+      p {
+        font-size: 0.8rem;
+        line-height: 1rem;
+      }
+    }
+  }
+
+  &__data {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 50%;
+    margin: 0 1rem;
+
+    &__login {
+      margin-top: 2rem;
+      input {
+        margin: 1rem 0;
+        padding: 0.5rem;
+      }
+    }
+
+    &__email {
+      margin: 1rem 0;
+
+      input {
+        margin: 1rem 0;
+        padding: 0.5rem;
+      }
+    }
+
+    &__gender {
+      display: flex;
+      flex-direction: column;
+
+      label {
+        margin: 1.2rem 2rem;
+      }
+    }
+  }
+}
+
+.description {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  span {
+    margin: 0 5%;
+  }
+
+  textarea {
+    margin: 1rem auto;
+    opacity: 0.7;
+    padding: 0.5rem;
+    font-family: $font-base;
+    width: 90%;
+    height: 5rem;
+    resize: none;
+  }
+}
+
+.save {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.custom-file-input {
+  &::-webkit-file-upload-button {
+    visibility: hidden;
+    color: white;
+  }
+  &::before {
+    margin: 1rem 0;
+    content: 'Select some files';
+    display: inline-block;
+    background: $headerButtonBackground;
+    border: 1px solid #999;
+    border-radius: 3px;
+    padding: 5px 8px;
+    outline: none;
+    white-space: nowrap;
+    -webkit-user-select: none;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 10pt;
+  }
+
+  &:hover::before {
+    border-color: black;
+  }
+
+  &:active::before {
+    background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+  }
+}

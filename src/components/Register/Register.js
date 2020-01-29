@@ -56,6 +56,7 @@ class Register extends Component {
                             displayName: login,
                             uid: user.uid,
                     }).then( () => {
+                            console.log(firebase.auth())
                             console.log("updated successfully!");
                             const displayName = user.displayName;
                             const uid = user.uid;
