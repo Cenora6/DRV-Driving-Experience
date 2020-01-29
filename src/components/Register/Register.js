@@ -56,7 +56,7 @@ class Register extends Component {
                             displayName: login,
                             uid: user.uid,
                     }).then( () => {
-                            console.log(firebase.auth())
+                            console.log(firebase.auth());
                             console.log("updated successfully!");
                             const displayName = user.displayName;
                             const uid = user.uid;
@@ -93,6 +93,8 @@ class Register extends Component {
                     login: login,
                     email: email,
                     points: 0,
+                    gender: "",
+                    description: "",
                 }).then(function(docRef) {
                 console.log("Document written with ID: ", docRef.id);
             })

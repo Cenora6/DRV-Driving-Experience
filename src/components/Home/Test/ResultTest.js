@@ -4,7 +4,8 @@ import {NavLink} from "react-router-dom";
 import {
     TwitterShareButton,
     FacebookShareButton,
-    LinkedinShareButton, FacebookShareCount,
+    LinkedinShareButton,
+    FacebookShareCount,
 } from "react-share";
 
 class ResultTest extends Component {

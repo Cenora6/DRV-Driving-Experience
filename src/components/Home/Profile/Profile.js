@@ -12,11 +12,40 @@ const fileTypes = [
 
 class Profile extends Component {
     state = {
+        file: "",
         fileSize: "",
         fileError: false,
         username: firebase.auth().currentUser.displayName,
+        email: firebase.auth().currentUser.email,
         descriptionValue: "",
-        profileName: "No file chosen",
+        fileName: "No file chosen",
+        uploading: false,
+        fileUrl: "",
+        gender: "",
+        userUid: "",
+    };
+
+    componentDidMount() {
+        this.getPhoto();
+        this.getData();
+        this.getProfile();
+    }
+
+    getData = () => {
+        const email = firebase.auth().currentUser.email;
+        firebase
+            .firestore()
+            .collection("users")
+            .where("email", "==", email )
+            .get()
+            .then(doc => {
+                doc.forEach(doc => {
+                    const uid = doc.id;
+                    this.setState({
+                        userUid: uid,
+                    })
+                });
+            });
     };
 
     handleImageChange = (e) => {
@@ -27,9 +56,10 @@ class Profile extends Component {
                 if (fileTypes.indexOf(file[i].type) !== -1) {
 
                     this.setState({
+                        file: file[i],
                         fileSize: this.returnFileSize(file[i].size),
-                        profileName: file[i].name,
-                    })
+                        fileName: file[i].name,
+                    });
 
                 } else {
                     this.setState({
@@ -41,7 +71,64 @@ class Profile extends Component {
     };
 
     handleSubmit = (e) => {
-        e.preventDefault()
+        const {userUid,descriptionValue,gender} = this.state;
+        firebase.firestore().collection('users')
+            .doc(userUid)
+            .update({
+                description: descriptionValue,
+                gender: gender,
+            })
+            .then( (authUser) => {
+                const user = firebase.auth().currentUser;
+                if(user) {
+                    user.updateProfile({
+                        displayName: this.state.username,
+                        uid: user.uid,
+                    }).then( () => {
+                        const { history } = this.props;
+                        history.push("/profile");
+                    })
+                }
+            })
+            .then(function(docRef) {
+                console.log("Document successfully updated!");
+            })
+            .catch(function(error) {
+                console.error("Error updating document: ", error);
+            });
+
+        if(this.state.file) {
+            firebase.storage()
+                .ref()
+                .child(`${this.state.email}/profile-image`)
+                .put(this.state.file)
+                .then(snapshot => {
+                    console.log("Profile photo updated!")
+                })
+                .catch(err => {
+                    console.error(err);
+                }).then( () => {
+                firebase.storage()
+                    .ref()
+                    .child(`${this.state.email}/profile-image`)
+                    .getDownloadURL()
+                    .then( (url) => {
+                        this.setState({
+                            fileUrl: url,
+                            uploading: true,
+                            file: "",
+                            fileSize: "",
+                            fileName: "",
+                        })
+                    })
+            });
+
+            this.setState({
+                uploading: false,
+            });
+        }
+
+        e.preventDefault();
     };
 
     returnFileSize = (number) => {
@@ -66,16 +153,75 @@ class Profile extends Component {
         })
     };
 
+    handleGenderChange = (e) => {
+        this.setState({
+            gender: e.target.id,
+        })
+    };
+
+    handleDeletePhoto =  () => {
+        this.setState({
+            file: "",
+            fileSize: "",
+            fileName: "No file chosen"
+        })
+    };
+
+    getPhoto = () => {
+        if(firebase.storage()
+            .ref()
+            .child(`${this.state.email}/profile-image`)) {
+            firebase.storage()
+                .ref()
+                .child(`${this.state.email}/profile-image`)
+                .getDownloadURL()
+                .then( (url) => {
+                    this.setState({
+                        fileUrl: url,
+                        uploading: !this.state.uploading,
+                        file: "",
+                        fileSize: "",
+                        fileName: "",
+                    })
+                }).catch( (error) => {
+                    if(error === "storage/object-not-found") {
+                        return
+                    }
+            });
+        }
+    };
+
+    getProfile = () => {
+        const email = firebase.auth().currentUser.email;
+
+        firebase
+            .firestore()
+            .collection("users")
+            .where("email", "==", email )
+            .get()
+            .then(doc => {
+                doc.forEach(doc => {
+                    const description = doc.data().description;
+                    const gender = doc.data().gender;
+
+                    this.setState({
+                        descriptionValue: description,
+                        gender: gender,
+                    })
+                });
+            });
+    };
+
     render() {
         const user = firebase.auth().currentUser;
-        const { fileSize, profileName } = this.state;
+        const { file, fileSize, fileName } = this.state;
 
         return (
             <>
                 <Header/>
                 <section className='profile'>
                     <div className='profile__photo'>
-                        <div className='profile__photo__square'></div>
+                        <div className='profile__photo__square'>{(this.state.uploading) && <img className='profile__photo__square__image' src={`${this.state.fileUrl}`} alt={'profilePhoto'}/>}</div>
                         <form className='profile__photo__form' onSubmit={this.handleSubmit}>
                             <label htmlFor="avatar" className='label'>Choose a profile picture:</label>
                             <input type="file"
@@ -84,8 +230,10 @@ class Profile extends Component {
                                    className='custom-file-input'
                                    onChange={this.handleImageChange}
                             />
-                            <p>{profileName}</p>
+                            {(file) ? <i className="fas fa-times" onClick={this.handleDeletePhoto}></i> : null}
+                            <p>{fileName}</p>
                             <p>{fileSize}</p>
+                            <span>To save the uploaded photo, click "save"</span>
                         </form>
                     </div>
                     <div className='profile__data'>
@@ -100,12 +248,16 @@ class Profile extends Component {
                         <div className='profile__data__gender'>
                             <span className='label'>Your gender:</span>
                             <div className='radio'>
-                                <input type='radio' id='female' name='gender'/>
+                                <input type='radio' id='female' name='gender' value={this.state.gender}
+                                       onChange={this.handleGenderChange}
+                                       checked={(this.state.gender == "female") && true}/>
                                 <label htmlFor='female'>Female</label>
                                 <div className="check"></div>
                             </div>
                             <div className='radio'>
-                                <input type='radio' id='male' name='gender'/>
+                                <input type='radio' id='male' name='gender' value={this.state.gender}
+                                       onChange={this.handleGenderChange}
+                                       checked={(this.state.gender == "male") && true}/>
                                 <label htmlFor='male'>Male</label>
                                 <div className="check"></div>
                             </div>
@@ -121,15 +273,28 @@ class Profile extends Component {
                     {this.state.fileError ?
                         <>
                                     <span data-for='error__login' data-tip="">
-                                        <button className='buttons__small'onClick={this.handleSubmit}>Send</button>
+                                        <button className='buttons__small' onClick={this.handleSubmit}>Send</button>
+                                        {!(this.state.uploading) &&
+                                    <div className="spinner">
+                                        <div className="bounce1"></div>
+                                        <div className="bounce2"></div>
+                                        <div className="bounce3"></div>
+                                    </div>}
                                     </span>
                             <ReactTooltip className='error__class' id='error__login' type='error' delayHide={2000} effect='solid'>
-                                <span>{this.state.errorText}</span>
+                                <span>{this.state.fileError}</span>
                             </ReactTooltip>
                         </>
-
                         :
-                        <button className='buttons__small'onClick={this.handleSubmit}>Save</button>
+                        <>
+                        <button className='buttons__small' onClick={this.handleSubmit}>Save</button>
+                            {!(this.state.uploading) &&
+                            <div className="spinner">
+                                <div className="bounce1"></div>
+                                <div className="bounce2"></div>
+                                <div className="bounce3"></div>
+                            </div>}
+                        </>
                     }
                 </section>
                 <WelcomeFooter/>

@@ -10,6 +10,7 @@ class Header extends Component {
 
     componentDidMount() {
         this.getPoints()
+
     }
 
     getPoints = () => {

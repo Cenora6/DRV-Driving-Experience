@@ -55,22 +55,22 @@ class QuestionsTest extends Component {
                         totalPoints: prevState.totalPoints + 1
                     }
                 });
+            }
 
-                if(chosenAnswer2 === correct2) {
-                    this.setState(prevState => {
-                        return {
-                            totalPoints: prevState.totalPoints + 1
-                        }
-                    });
-
-                    if(chosenAnswer3 === correct3) {
-                        this.setState(prevState => {
-                            return {
-                                totalPoints: prevState.totalPoints + 1
-                            }
-                        });
+            if(chosenAnswer2 === correct2) {
+                this.setState(prevState => {
+                    return {
+                        totalPoints: prevState.totalPoints + 1
                     }
-                }
+                });
+            }
+
+            if(chosenAnswer3 === correct3) {
+                this.setState(prevState => {
+                    return {
+                        totalPoints: prevState.totalPoints + 1
+                    }
+                });
             }
             this.setState({
                 result: true,
