@@ -132,7 +132,6 @@ class Forum extends Component {
         buttonList = this.showButtons(buttonCount);
         buttonUserList = this.showButtons(buttonUserCount);
         buttonTagList = this.showButtons(buttonTagCount);
-        console.log(tagQuestions);
 
         return (
             <>
@@ -186,7 +185,7 @@ class Forum extends Component {
                                             {question.answer[1]}
                                         </p>
                                     </div>
-                               tagQuestions </section>
+                                </section>
                             )
                         })
                         }
@@ -216,40 +215,32 @@ class Forum extends Component {
                             )
                         })
                         }
-
-                        {/*{(tagQuestions !== []) ?*/}
-                        {/*    <p>sddf</p>*/}
-
-                        {/*    : null*/}
-
-                        {/*}*/}
-
-                        {/*{(this.state.pageCounter === 2) &&*/}
-                        {/*    tagQuestions.map( (question, index) => {*/}
-                        {/*        return (*/}
-                        {/*            <section key={index} className='forum__asks__single'>*/}
-                        {/*                <div className='single'>*/}
-                        {/*                    <p className='title'>{question.tip}</p>*/}
-                        {/*                    <ReadMoreReact text={`${question.question}`}*/}
-                        {/*                                   readMoreText="read more..."*/}
-                        {/*                                   min={100}*/}
-                        {/*                                   ideal={100}*/}
-                        {/*                                   max={300}/>*/}
-                        {/*                    <div className='data'>*/}
-                        {/*                        <p>{question.login}</p>*/}
-                        {/*                        <p>{question.date}</p>*/}
-                        {/*                    </div>*/}
-                        {/*                </div>*/}
-                        {/*                <div className='forum__asks__answer' key={question.answer[0]}>*/}
-                        {/*                    <i className="far fa-comment"></i>*/}
-                        {/*                    <p> <span>Posted on: {question.answer[0]}</span> <br/>*/}
-                        {/*                        {question.answer[1]}*/}
-                        {/*                    </p>*/}
-                        {/*                </div>*/}
-                        {/*            </section>*/}
-                        {/*        )*/}
-                        {/*    })*/}
-                        {/*}*/}
+                        {(this.state.pageCounter === 2) &&
+                        tagQuestions.map( (question, index) => {
+                            return (
+                                <section key={index} className='forum__asks__single'>
+                                    <div className='single'>
+                                        <p className='title'>{question.tip}</p>
+                                        <ReadMoreReact text={`${question.question}`}
+                                                       readMoreText="read more..."
+                                                       min={100}
+                                                       ideal={100}
+                                                       max={300}/>
+                                        <div className='data'>
+                                            <p>{question.login}</p>
+                                            <p>{question.date}</p>
+                                        </div>
+                                    </div>
+                                    <div className='forum__asks__answer' key={question.answer[0]}>
+                                        <i className="far fa-comment"></i>
+                                        <p> <span>Posted on: {question.answer[0]}</span> <br/>
+                                            {question.answer[1]}
+                                        </p>
+                                    </div>
+                                </section>
+                            )
+                        })
+                        }
 
                         {(this.state.pageCounter === 0) &&
                         <div className='forum__asks__pages'>
