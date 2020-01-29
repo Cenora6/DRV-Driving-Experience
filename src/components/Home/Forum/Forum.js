@@ -14,6 +14,7 @@ class Forum extends Component {
         questionsPerPage: 3,
         buttons: 3,
         display:  false,
+        clicked:  false,
         fade: false,
         userQuestions: [],
         tagQuestions: [],
@@ -67,7 +68,7 @@ class Forum extends Component {
     handleShow = () => {
         this.setState({
             display: !this.state.display,
-            fade: !this.state.fade,
+            clicked: false
         })
 
     };
@@ -103,7 +104,7 @@ class Forum extends Component {
         for (let i = 0; i < this.state.questions.length; i++) {
             if(this.state.questions[i].tip === tag) {
 
-                array.push(this.state.questions[i])
+                array.push(this.state.questions[i]);
 
                 this.setState({
                     tagQuestions: array,
@@ -113,11 +114,13 @@ class Forum extends Component {
 
         this.setState({
             pageCounter: 2,
+            clicked: true,
+            display: false,
         })
     };
 
     render() {
-        const {currentPage, questionsPerPage, questions, display, userQuestions, tagQuestions} = this.state;
+        const {currentPage, questionsPerPage, questions, display, userQuestions, tagQuestions, clicked} = this.state;
         const indexLast = currentPage * questionsPerPage;
         const indexFirst = indexLast - questionsPerPage;
         const filterQuestions = questions.slice(indexFirst, indexLast);
@@ -145,7 +148,7 @@ class Forum extends Component {
                                 return (
                                     <SlideDown className={'my-dropdown-slidedown'} key={index}>
                                         {this.props.open ? this.props.children : null}
-                                        <li className={ (display === false) && "hidden"} key={index} onClick={this.handleTags}>{tip.title}</li>
+                                        <li className={ (display === false || clicked === true) && "hidden"} key={index} onClick={this.handleTags}>{tip.title}</li>
                                     </SlideDown>
                                 )
                             })}
