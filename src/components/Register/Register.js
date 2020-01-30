@@ -56,6 +56,7 @@ class Register extends Component {
                             displayName: login,
                             uid: user.uid,
                     }).then( () => {
+                            sessionStorage.setItem("login", `${authUser.user.displayName}`);
                             console.log(firebase.auth());
                             console.log("updated successfully!");
                             const displayName = user.displayName;
@@ -87,7 +88,6 @@ class Register extends Component {
                     }
                 });
 
-
             firebase.firestore().collection('users')
                 .add({
                     login: login,
@@ -95,6 +95,7 @@ class Register extends Component {
                     points: 0,
                     gender: "",
                     description: "",
+                    role: "user"
                 }).then(function(docRef) {
                 console.log("Document written with ID: ", docRef.id);
             })

@@ -9,8 +9,7 @@ class Header extends Component {
     };
 
     componentDidMount() {
-        this.getPoints()
-
+        this.getPoints();
     }
 
     getPoints = () => {
@@ -22,17 +21,17 @@ class Header extends Component {
             .where("email", "==", email )
             .get()
             .then(doc => {
-            const array = [];
+                const array = [];
 
-            doc.forEach(doc => {
-                const points = doc.data().points;
-                array.push(points);
-            });
+                doc.forEach(doc => {
+                    const points = doc.data().points;
+                    array.push(points);
+                });
 
-            this.setState({
-                userPoints: array,
-            })
-        });
+                this.setState({
+                    userPoints: array,
+                });
+        })
     };
 
     handleLogOut = () => {
