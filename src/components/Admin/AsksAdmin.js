@@ -204,7 +204,6 @@ class AsksAdmin extends Component {
                             {buttonNotAnswered}
                         </div>
                         }
-
                     </div>
                 </section>
                 <WelcomeFooter/>

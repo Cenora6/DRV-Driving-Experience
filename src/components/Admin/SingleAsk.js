@@ -2,22 +2,23 @@ import React, {Component} from "react";
 import Header from "./../Home/Header.js";
 import WelcomeFooter from "./../Welcome/WelcomeFooter";
 import firebase from "../firebase/firebase";
-import ReadMoreReact from "read-more-react";
 import {NavLink} from "react-router-dom";
 
 export default class SingleAsk extends Component {
     state = {
-        questions: [],
+        question: [],
     };
 
     componentDidMount() {
-        this.getAllAsks();
+        this.getOneTask();
     }
 
-    getAllAsks = () => {
+    getOneTask = () => {
+        const id = parseInt(this.props.match.params.id);
         firebase
             .firestore()
             .collection("asks")
+            .where("id", "==", id)
             .get()
             .then((doc) => {
                 const array = [];
@@ -29,43 +30,48 @@ export default class SingleAsk extends Component {
                 array.reverse();
 
                 this.setState({
-                    questions: array,
+                    question: array,
                 });
             });
     };
 
     render() {
 
-        const { questions } = this.state;
-        const i = this.props.match.params.id.toString();
+        const { question } = this.state;
+        console.log(question);
+        console.log(question.length > 0)
 
         return (
             <>
                 <Header/>
-                {questions.length !== 0 ?
+                {question.length > 0 ?
                     <>
                         <NavLink to={'/admin-asks'}>
                             <button className='buttons__big'><i className="fas fa-long-arrow-alt-left"></i>go back</button>
                         </NavLink>
-                    <section key={i} className='forum__asks__single'>
+                    <section key={question[0].id} className='forum__asks__single'>
                         <div className='single'>
-                            <p className='title'>{questions[i].tip}</p>
-                            <ReadMoreReact text={`${questions[i].question}`}
-                                           readMoreText="read more..."
-                                           min={100}
-                                           ideal={100}
-                                           max={300}/>
+                            <p className='title'>{question[0].tip}</p>
+                            <p className='display-text-group'>{question[0].question}</p>
                             <div className='data'>
-                                <p>{questions[i].login}</p>
-                                <p>{questions[i].date}</p>
+                                <p>{question[0].login}</p>
+                                <p>{question[0].date}</p>
                             </div>
                         </div>
-                        <div className='forum__asks__answer' key={questions[i].answer[0]}>
-                            <i className="far fa-comment"></i>
-                            <p> <span>Posted on: {questions[i].answer[0]}</span> <br/>
-                                {questions[i].answer[1]}
-                            </p>
-                        </div>
+                        {question[0].answer.length > 0 ?
+                            <div className='forum__asks__answer' key={question[0].id}>
+                                <i className="far fa-comment"></i>
+                                <p><span>Posted on: {question[0].answer[0]}</span> <br/>
+                                    {question[0].answer[1]}
+                                </p>
+                            </div>
+                            :
+
+                            <div className='forum__asks__answer' key={question[0].id}>
+                                <i className="far fa-comment"></i>
+                                <p>No answer yet</p>
+                            </div>
+                        }
                     </section>
                         </>
                     :
