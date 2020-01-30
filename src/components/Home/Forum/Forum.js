@@ -15,7 +15,6 @@ class Forum extends Component {
         buttons: 3,
         display:  false,
         clicked:  false,
-        fade: false,
         userQuestions: [],
         tagQuestions: [],
         pageCounter: 0,
@@ -35,7 +34,9 @@ class Forum extends Component {
 
                 doc.forEach((doc) => {
                     const data = doc.data();
-                    array.push(data);
+                    if(doc.data().answer.length !== 0) {
+                        array.push(data);
+                    }
                 });
                 array.reverse();
                 this.setState({
@@ -85,6 +86,9 @@ class Forum extends Component {
 
                 doc.forEach((doc) => {
                     const data = doc.data();
+                    if(doc.data().answer.length !== 0) {
+                        array.push(data);
+                    }
                     array.push(data);
                 });
                 array.reverse();
@@ -168,80 +172,85 @@ class Forum extends Component {
                         </ul>
                         { (this.state.pageCounter === 0) &&
                         filterQuestions.map( (question, index) => {
-                            return (
-                                <section key={index} className='forum__asks__single'>
-                                    <div className='single'>
-                                        <p className='title'>{question.tip}</p>
-                                        <ReadMoreReact text={`${question.question}`}
-                                                       readMoreText="read more..."
-                                                       min={100}
-                                                       ideal={100}
-                                                       max={300}/>
-                                        <div className='data'>
-                                            <p>{question.login}</p>
-                                            <p>{question.date}</p>
+                            if(question.answer.length > 0) {
+                                return (
+                                    <section key={index} className='forum__asks__single'>
+                                        <div className='single'>
+                                            <p className='title'>{question.tip}</p>
+                                            <ReadMoreReact text={`${question.question}`}
+                                                           readMoreText="read more..."
+                                                           min={100}
+                                                           ideal={100}
+                                                           max={300}/>
+                                            <div className='data'>
+                                                <p>{question.login}</p>
+                                                <p>{question.date}</p>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className='forum__asks__answer' key={question.answer[0]}>
-                                        <i className="far fa-comment"></i>
-                                        <p> <span>Posted on: {question.answer[0]}</span> <br/>
-                                            {question.answer[1]}
-                                        </p>
-                                    </div>
-                                </section>
-                            )
+                                        <div className='forum__asks__answer' key={question.answer[0]}>
+                                            <i className="far fa-comment"></i>
+                                            <p> <span>Posted on: {question.answer[0]}</span> <br/>
+                                                {question.answer[1]}
+                                            </p>
+                                        </div>
+                                    </section>
+                                )
+                            }
                         })
                         }
                         {(this.state.pageCounter === 1) &&
                         userQuestions.map( (question, index) => {
-                            return (
-                                <section key={index} className='forum__asks__single'>
-                                    <div className='single'>
-                                        <p className='title'>{question.tip}</p>
-                                        <ReadMoreReact text={`${question.question}`}
-                                                       readMoreText="read more..."
-                                                       min={100}
-                                                       ideal={100}
-                                                       max={300}/>
-                                        <div className='data'>
-                                            <p>{question.login}</p>
-                                            <p>{question.date}</p>
-                                        </div>
-                                    </div>
-                                    <div className='forum__asks__answer' key={question.answer[0]}>
-                                        <i className="far fa-comment"></i>
-                                        <p> <span>Posted on: {question.answer[0]}</span> <br/>
-                                            {question.answer[1]}
-                                        </p>
-                                    </div>
-                                </section>
-                            )
-                        })
-                        }
+                                if(question.answer.length > 0) {
+                                    return (
+                                        <section key={index} className='forum__asks__single'>
+                                            <div className='single'>
+                                                <p className='title'>{question.tip}</p>
+                                                <ReadMoreReact text={`${question.question}`}
+                                                               readMoreText="read more..."
+                                                               min={100}
+                                                               ideal={100}
+                                                               max={300}/>
+                                                <div className='data'>
+                                                    <p>{question.login}</p>
+                                                    <p>{question.date}</p>
+                                                </div>
+                                            </div>
+                                            <div className='forum__asks__answer' key={question.answer[0]}>
+                                                <i className="far fa-comment"></i>
+                                                <p> <span>Posted on: {question.answer[0]}</span> <br/>
+                                                    {question.answer[1]}
+                                                </p>
+                                            </div>
+                                        </section>
+                                    )}
+                            }
+                        )}
                         {(this.state.pageCounter === 2) &&
                         tagQuestions.map( (question, index) => {
-                            return (
-                                <section key={index} className='forum__asks__single'>
-                                    <div className='single'>
-                                        <p className='title'>{question.tip}</p>
-                                        <ReadMoreReact text={`${question.question}`}
-                                                       readMoreText="read more..."
-                                                       min={100}
-                                                       ideal={100}
-                                                       max={300}/>
-                                        <div className='data'>
-                                            <p>{question.login}</p>
-                                            <p>{question.date}</p>
+                            if(question.answer.length > 0) {
+                                return (
+                                    <section key={index} className='forum__asks__single'>
+                                        <div className='single'>
+                                            <p className='title'>{question.tip}</p>
+                                            <ReadMoreReact text={`${question.question}`}
+                                                           readMoreText="read more..."
+                                                           min={100}
+                                                           ideal={100}
+                                                           max={300}/>
+                                            <div className='data'>
+                                                <p>{question.login}</p>
+                                                <p>{question.date}</p>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className='forum__asks__answer' key={question.answer[0]}>
-                                        <i className="far fa-comment"></i>
-                                        <p> <span>Posted on: {question.answer[0]}</span> <br/>
-                                            {question.answer[1]}
-                                        </p>
-                                    </div>
-                                </section>
-                            )
+                                        <div className='forum__asks__answer' key={question.answer[0]}>
+                                            <i className="far fa-comment"></i>
+                                            <p> <span>Posted on: {question.answer[0]}</span> <br/>
+                                                {question.answer[1]}
+                                            </p>
+                                        </div>
+                                    </section>
+                                )
+                            }
                         })
                         }
 

@@ -1,0 +1,29 @@
+.admin {
+
+  .single {
+    margin: 0;
+
+    .fas {
+      color: $deleteIcon;
+      text-shadow: 0 1px #000;
+    }
+  }
+
+  .title {
+    width: 65%;
+  }
+
+  .data {
+    display: flex;
+    justify-content: flex-end;
+    width: 35%;
+
+    p {
+      margin-left: 1rem;
+    }
+  }
+}
+
+.loading {
+  margin-top: 1rem;
+}

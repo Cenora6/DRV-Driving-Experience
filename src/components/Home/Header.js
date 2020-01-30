@@ -48,7 +48,6 @@ class Header extends Component {
     };
 
     render() {
-        const user = firebase.auth().currentUser;
         const linkstyle = {
             textDecoration: "none",
             color: "#FFF",
@@ -68,27 +67,49 @@ class Header extends Component {
                     <h1 className='header__title'>DRV</h1>
                     <img src={logo} alt={'driving'} className='header__logo'/>
                     <div className='header__user'>
-                        <p className='header__user__name'>{user.displayName}</p>
+                        <p className='header__user__name'>{firebase.auth().currentUser.displayName}</p>
                         <NavLink style={profileLink} to='/profile'><span className='header__user__desc'> profile</span></NavLink>
                         <span> | </span>
                         <span className='header__user__desc' onClick={this.handleLogOut}> logout</span>
-                        <p className='header__user__desc'>points {this.state.userPoints}</p>
+                        {(sessionStorage.getItem("role") === "user") ?
+                            <p className='header__user__desc'>points {this.state.userPoints}</p> :
+                            null}
                     </div>
                 </section>
                 <section className='links'>
                     <ul className='links__list'>
-                        <NavLink to='/home/' style={linkstyle}>
-                            <li className='links__list__advices cross__fade'>Advices</li>
-                        </NavLink>
 
-                        <NavLink to='/forum/' style={linkstyle}>
-                            <li className='links__list__forum cross__fade'>Forum</li>
-                        </NavLink>
+                        {(sessionStorage.getItem("role") === "user") ?
+                            <>
+                                <NavLink to='/home/' style={linkstyle}>
+                                    <li className='links__list__advices cross__fade'>Advices</li>
+                                </NavLink>
 
-                        <li className='links__list__search'>
-                            <input name='search' id='search' placeholder='search...'/>
-                            <span><i className="fas fa-search"></i></span>
-                        </li>
+                                <NavLink to='/forum/' style={linkstyle}>
+                                    <li className='links__list__forum cross__fade'>Forum</li>
+                                </NavLink>
+
+                                <li className='links__list__search'>
+                                    <input name='search' id='search' placeholder='search...'/>
+                                    <span><i className="fas fa-search"></i></span>
+                                </li>
+                            </>
+                            :
+                            <>
+                                <NavLink to='/admin' style={linkstyle}>
+                                    <li className='links__list__forum cross__fade'>Main</li>
+                                </NavLink>
+                                <NavLink to='/admin-tips' style={linkstyle}>
+                                    <li className='links__list__advices cross__fade'>Advices</li>
+                                </NavLink>
+                                <NavLink to='/admin-users' style={linkstyle}>
+                                    <li className='links__list__forum cross__fade'>Users</li>
+                                </NavLink>
+                                <NavLink to='/admin-asks' style={linkstyle}>
+                                    <li className='links__list__advices cross__fade'>Asks</li>
+                                </NavLink>
+                            </>
+                        }
                     </ul>
                 </section>
             </>

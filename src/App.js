@@ -18,6 +18,10 @@ import AllTips from "./components/Home/Tips/AllTips";
 import Tags from "./components/Home/Tags/Tags";
 import Profile from "./components/Home/Profile/Profile";
 import Admin from "./components/Admin/Admin";
+import UsersAdmin from "./components/Admin/UsersAdmin";
+import TipsAdmin from "./components/Admin/TipsAdmin";
+import AsksAdmin from "./components/Admin/AsksAdmin";
+import SingleAsk from "./components/Admin/SingleAsk";
 
 class App extends Component {
 
@@ -41,7 +45,13 @@ class App extends Component {
                         <PrivateRoute path='/tips/:id' component={AllTips} />
                         <PrivateRoute path='/tags/:id' component={Tags} />
                         <PrivateRoute path='/profile' component={Profile} />
-                        <AdminRoute path='/admin' component={Admin} />
+
+                        {/*AdminRoute*/}
+                        <PrivateRoute path='/admin' component={Admin} />
+                        <PrivateRoute path='/admin-users' component={UsersAdmin} />
+                        <PrivateRoute path='/admin-tips' component={TipsAdmin} />
+                        <PrivateRoute path='/admin-asks' component={AsksAdmin} />
+                        <PrivateRoute path='/a-asks/:id' component={SingleAsk} />
                     </AnimatedSwitch>
                 </Switch>
             </HashRouter>

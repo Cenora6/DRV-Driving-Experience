@@ -183,3 +183,9 @@ h3 {
 .hidden {
   display: none;
 }
+
+.information {
+  color: $tipsHeaderBackground;
+  font-weight: 600;
+  letter-spacing: 0.1rem;
+}

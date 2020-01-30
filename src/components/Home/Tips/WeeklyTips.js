@@ -22,11 +22,36 @@ class WeeklyTips extends Component {
         clicked: false,
         clickedShare: false,
         date: [new Date().getDate() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getFullYear()],
+        questionConfirm: false,
+        questionId: "",
     };
 
     componentDidMount() {
         this.generateWeeklyTip();
+        this.checkId();
     }
+
+    checkId = () => {
+        firebase.firestore()
+            .collection("asks")
+            .orderBy("id", "desc");
+
+        firebase.firestore()
+            .collection("asks")
+            .get()
+            .then( (doc) => {
+                const idArray = [];
+
+                doc.forEach((doc) => {
+                    const data = doc.data();
+                    idArray.push(data);
+
+                    this.setState({
+                        questionId: idArray.length,
+                    })
+                });
+        })
+    };
 
     handleChange = (e) => {
         this.setState({
@@ -36,7 +61,7 @@ class WeeklyTips extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        const { question, date,randomTip } = this.state;
+        const { question, date, randomTip, questionId } = this.state;
         const weeklyTip = tips.tips[randomTip];
 
         if (question.length > 100) {
@@ -44,6 +69,7 @@ class WeeklyTips extends Component {
                 .firestore()
                 .collection(`asks`)
                 .add({
+                    id: questionId + 1,
                     date: date.toString(),
                     tip: weeklyTip.title,
                     email: firebase.auth().currentUser.email,
@@ -58,6 +84,7 @@ class WeeklyTips extends Component {
                 });
 
             this.setState({
+                questionConfirm: true,
                 question: "",
                 questionError: false,
             });
@@ -123,6 +150,7 @@ class WeeklyTips extends Component {
     };
 
     render() {
+        console.log(this.state.questionId)
         const clicked = {color: "#663FB6", fontSize: "2.5rem"};
         const shareUrl = 'https://github.com/Cenora6';
         const title = 'Visit Cenora6 on Github';
@@ -218,6 +246,7 @@ class WeeklyTips extends Component {
                     <textarea value={this.state.question} onChange={this.handleChange}></textarea>
                 </form>
                 <div className='tips__button'>
+                    {this.state.questionConfirm && <span className='information'>Thank you for sending the question!</span>}
                     {this.state.questionError ?
                         <>
                             <span data-for='error__email' data-tip="">

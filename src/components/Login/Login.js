@@ -47,7 +47,7 @@ class Login extends Component {
                         password: "",
                     });
 
-                    sessionStorage.setItem("user", `${authUser.user}`);
+                    sessionStorage.setItem("username", `${authUser.user.displayName}`);
 
                     firebase
                         .firestore()

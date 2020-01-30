@@ -23,6 +23,34 @@ export default class AllTips extends Component {
         question: "",
         questionError: false,
         date: [new Date().getDate() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getFullYear()],
+        questionConfirm: false,
+        questionId: "",
+    };
+
+    componentDidMount() {
+        this.checkId();
+    }
+
+    checkId = () => {
+        firebase.firestore()
+            .collection("asks")
+            .orderBy("id", "desc");
+
+        firebase.firestore()
+            .collection("asks")
+            .get()
+            .then( (doc) => {
+                const idArray = [];
+
+                doc.forEach((doc) => {
+                    const data = doc.data();
+                    idArray.push(data);
+
+                    this.setState({
+                        questionId: idArray.length,
+                    })
+                });
+            })
     };
 
     checkAnswer1 = (e) => {
@@ -130,7 +158,7 @@ export default class AllTips extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        const { question, date } = this.state;
+        const { question, date, questionId } = this.state;
         const i = this.props.match.params.id.toString();
         const weeklyTip = tips.tips[i - 1];
 
@@ -139,6 +167,7 @@ export default class AllTips extends Component {
                 .firestore()
                 .collection(`asks`)
                 .add({
+                    id: questionId + 1,
                     date: date.toString(),
                     tip: weeklyTip.title,
                     email: firebase.auth().currentUser.email,
@@ -155,6 +184,7 @@ export default class AllTips extends Component {
             this.setState({
                 question: "",
                 questionError: false,
+                questionConfirm: true,
             });
 
         } else {
@@ -268,6 +298,7 @@ export default class AllTips extends Component {
                     <textarea value={this.state.question} onChange={this.handleChange}></textarea>
                 </form>
                 <div className='tips__button'>
+                    {this.state.questionConfirm && <span className='information'>Thank you for sending the question!</span>}
                     {this.state.questionError ?
                         <>
                             <span data-for='error__email' data-tip="">

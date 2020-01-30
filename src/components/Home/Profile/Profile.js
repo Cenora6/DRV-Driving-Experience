@@ -86,7 +86,11 @@ class Profile extends Component {
                         uid: user.uid,
                     }).then( () => {
                         const { history } = this.props;
-                        history.push("/profile");
+                        if(sessionStorage.getItem("role") === "user") {
+                            history.push("/home");
+                        } else if (sessionStorage.getItem("role") === "admin") {
+                            history.push("/admin");
+                        }
                     })
                 }
             })
@@ -250,14 +254,14 @@ class Profile extends Component {
                             <div className='radio'>
                                 <input type='radio' id='female' name='gender' value={this.state.gender}
                                        onChange={this.handleGenderChange}
-                                       checked={(this.state.gender == "female") && true}/>
+                                       checked={(this.state.gender === "female") && true}/>
                                 <label htmlFor='female'>Female</label>
                                 <div className="check"></div>
                             </div>
                             <div className='radio'>
                                 <input type='radio' id='male' name='gender' value={this.state.gender}
                                        onChange={this.handleGenderChange}
-                                       checked={(this.state.gender == "male") && true}/>
+                                       checked={(this.state.gender === "male") && true}/>
                                 <label htmlFor='male'>Male</label>
                                 <div className="check"></div>
                             </div>
