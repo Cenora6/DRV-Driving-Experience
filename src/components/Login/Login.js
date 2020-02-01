@@ -4,7 +4,7 @@ import WelcomeFooter from "./../Welcome/WelcomeFooter";
 import {NavLink} from "react-router-dom";
 import errorIcon from './../../assets/error.png'
 import ReactTooltip from 'react-tooltip'
-import firebase from "../firebase/firebase";
+import {firebase} from "../firebase/firebase";
 
 class Login extends Component {
     state = {

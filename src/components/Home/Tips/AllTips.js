@@ -6,7 +6,7 @@ import WelcomeFooter from "../../Welcome/WelcomeFooter";
 import {FacebookShareButton, LinkedinShareButton, TwitterShareButton} from "react-share";
 import ResultTest from "../Test/ResultTest";
 import ReactTooltip from "react-tooltip";
-import firebase from "../../firebase/firebase";
+import {firebase} from "../../firebase/firebase";
 
 export default class AllTips extends Component {
     state = {

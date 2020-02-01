@@ -4,7 +4,7 @@ import WelcomeFooter from "./../Welcome/WelcomeFooter";
 import {NavLink} from "react-router-dom";
 import errorIcon from './../../assets/error.png'
 import ReactTooltip from 'react-tooltip';
-import firebase from "./../firebase/firebase";
+import {firebase} from "./../firebase/firebase";
 
 class Register extends Component {
     state = {
@@ -95,7 +95,8 @@ class Register extends Component {
                     points: 0,
                     gender: "",
                     description: "",
-                    role: "user"
+                    role: "user",
+                    registerDate: [new Date().getHours() + ':' + new Date().getMinutes()],
                 }).then(function(docRef) {
                 console.log("Document written with ID: ", docRef.id);
             })

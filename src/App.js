@@ -51,7 +51,7 @@ class App extends Component {
                         <PrivateRoute path='/admin-users' component={UsersAdmin} />
                         <PrivateRoute path='/admin-tips' component={TipsAdmin} />
                         <PrivateRoute path='/admin-asks' component={AsksAdmin} />
-                        <PrivateRoute path='/a-asks/:id' component={SingleAsk} />
+                        <PrivateRoute path='/asks/:id' component={SingleAsk} />
                     </AnimatedSwitch>
                 </Switch>
             </HashRouter>

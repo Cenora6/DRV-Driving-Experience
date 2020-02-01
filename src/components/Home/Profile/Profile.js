@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Header from "../Header";
 import WelcomeFooter from "../../Welcome/WelcomeFooter";
-import firebase from "../../firebase/firebase";
+import {firebase} from "../../firebase/firebase";
 import ReactTooltip from 'react-tooltip'
 
 const fileTypes = [

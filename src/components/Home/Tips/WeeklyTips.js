@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import firebase from "../../firebase/firebase";
+import {firebase} from "../../firebase/firebase";
 import ReactTooltip from "react-tooltip";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import {NavLink} from "react-router-dom";

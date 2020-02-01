@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Header from "./../Header";
 import WelcomeFooter from "../../Welcome/WelcomeFooter";
 import ReadMoreReact from 'read-more-react';
-import firebase from "../../firebase/firebase";
+import {firebase} from "../../firebase/firebase";
 import tips from './../../Database/tips'
 import {SlideDown} from 'react-slidedown'
 import 'react-slidedown/lib/slidedown.css'

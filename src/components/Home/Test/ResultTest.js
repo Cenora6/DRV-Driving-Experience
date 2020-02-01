@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import firebase from "../../firebase/firebase";
+import {firebase} from "../../firebase/firebase";
 import {NavLink} from "react-router-dom";
 import {
     TwitterShareButton,

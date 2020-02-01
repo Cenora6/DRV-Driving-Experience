@@ -1,8 +1,8 @@
 import React, {Component} from "react";
 import Header from "./../Home/Header.js";
 import WelcomeFooter from "./../Welcome/WelcomeFooter";
-import firebase from "../firebase/firebase";
-import {NavLink, Link} from "react-router-dom";
+import {firebase} from "../firebase/firebase";
+import {NavLink} from "react-router-dom";
 
 export default class SingleAsk extends Component {
     state = {

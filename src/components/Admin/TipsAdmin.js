@@ -3,6 +3,9 @@ import WelcomeFooter from "../Welcome/WelcomeFooter";
 import Header from "../Home/Header";
 
 class TipsAdmin extends Component {
+    state = {
+
+    };
 
     render() {
         return (

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import WelcomeFooter from "../Welcome/WelcomeFooter";
 import Header from "../Home/Header";
-import firebase from "../firebase/firebase";
+import {firebase} from "../firebase/firebase";
 import {NavLink} from "react-router-dom";
 
 class AsksAdmin extends Component {
@@ -10,8 +10,6 @@ class AsksAdmin extends Component {
         currentPage: 1,
         questionsPerPage: 10,
         buttons: 3,
-        display:  false,
-        clicked:  false,
         notAnsweredQuestions: [],
         notAnsweredNo: 0,
         pageCounter: 0,
@@ -137,7 +135,7 @@ class AsksAdmin extends Component {
                         filterQuestions.map((question, index) => {
                             return (
                                 <section className='forum__asks__single admin animation' key={question.id}>
-                                    <NavLink to={`/a-asks/${question.id}`} style={style}>
+                                    <NavLink to={`/asks/${question.id}`} style={style}>
                                         <div className='single'>
                                             <p className='title'>{question.tip}</p>
                                             {question.answer.length > 0 && <p className='answered'>Answered</p>}
