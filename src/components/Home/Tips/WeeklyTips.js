@@ -150,7 +150,7 @@ class WeeklyTips extends Component {
     };
 
     render() {
-        console.log(this.state.questionId)
+        console.log(this.state.questionId);
         const clicked = {color: "#663FB6", fontSize: "2.5rem"};
         const shareUrl = 'https://github.com/Cenora6';
         const title = 'Visit Cenora6 on Github';

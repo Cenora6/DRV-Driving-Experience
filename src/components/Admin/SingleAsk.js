@@ -2,11 +2,15 @@ import React, {Component} from "react";
 import Header from "./../Home/Header.js";
 import WelcomeFooter from "./../Welcome/WelcomeFooter";
 import firebase from "../firebase/firebase";
-import {NavLink} from "react-router-dom";
+import {NavLink, Link} from "react-router-dom";
 
 export default class SingleAsk extends Component {
     state = {
         question: [],
+        editing: false,
+        answer: "",
+        date: [new Date().getDate() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getFullYear() + ' , '
+        + new Date().getHours() + ':' + new Date().getMinutes()],
     };
 
     componentDidMount() {
@@ -31,15 +35,81 @@ export default class SingleAsk extends Component {
 
                 this.setState({
                     question: array,
+                    answer: array[0].answer[1]
                 });
+            });
+    };
+
+    deleteData = (id) => {
+        firebase
+            .firestore()
+            .collection("asks")
+            .where("id", "==", id)
+            .get()
+            .then( doc => {
+                doc.forEach( doc => {
+                    firebase.firestore()
+                        .collection("asks")
+                        .doc(doc.id)
+                        .delete()
+                        .then( () => {
+                            console.log("Document successfully deleted!");
+                            this.setState({
+                                questions: this.state.questions.filter(item => item.id !== id)
+                            });
+                            const { history } = this.props;
+                            history.push("/admin-asks");
+                        }).catch(function(error) {
+                        console.error("Error removing document: ", error);
+                    })
+                })
+            });
+    };
+
+    handleChange = (e) => {
+        this.setState({
+            answer: e.target.value,
+        })
+    };
+
+    handleAnswer = (e) => {
+        this.setState({
+            editing: true,
+        })
+    };
+
+    handleSaveAnswer = (id) => {
+        const { question, answer, date } = this.state;
+        firebase
+            .firestore()
+            .collection("asks")
+            .where("id", "==", id)
+            .get()
+            .then( doc => {
+                doc.forEach( doc => {
+                    firebase.firestore()
+                        .collection("asks")
+                        .doc(doc.id)
+                        .update({
+                            answer: [question[0].answer[0], answer, date.toString()],
+                        })
+                        .then( () => {
+                            console.log("Document successfully updated!");
+                            this.setState({
+                                editing: false,
+                            });
+                            const { history } = this.props;
+                            history.push("/admin-asks");
+                        }).catch(function(error) {
+                        console.error("Error updating document: ", error);
+                    })
+                })
             });
     };
 
     render() {
 
-        const { question } = this.state;
-        console.log(question);
-        console.log(question.length > 0)
+        const { question, editing } = this.state;
 
         return (
             <>
@@ -49,31 +119,49 @@ export default class SingleAsk extends Component {
                         <NavLink to={'/admin-asks'}>
                             <button className='buttons__big'><i className="fas fa-long-arrow-alt-left"></i>go back</button>
                         </NavLink>
-                    <section key={question[0].id} className='forum__asks__single'>
-                        <div className='single'>
-                            <p className='title'>{question[0].tip}</p>
-                            <p className='display-text-group'>{question[0].question}</p>
-                            <div className='data'>
-                                <p>{question[0].login}</p>
-                                <p>{question[0].date}</p>
+                        <section key={question[0].id} className='forum__asks__single admin__single'>
+                            <div className='single'>
+                                <p className='title'>{question[0].tip} <br/></p>
+                                <p className='display-text-group'>{question[0].question}</p>
+                                <div className='data'>
+                                    <p>{question[0].login}</p>
+                                    <p>{question[0].date} <br/>
+                                        <i className="fas fa-times-circle animation animation2" onClick={ () => this.deleteData( question[0].id )}></i>
+                                    </p>
+                                </div>
                             </div>
-                        </div>
-                        {question[0].answer.length > 0 ?
-                            <div className='forum__asks__answer' key={question[0].id}>
-                                <i className="far fa-comment"></i>
-                                <p><span>Posted on: {question[0].answer[0]}</span> <br/>
-                                    {question[0].answer[1]}
-                                </p>
-                            </div>
-                            :
-
-                            <div className='forum__asks__answer' key={question[0].id}>
-                                <i className="far fa-comment"></i>
-                                <p>No answer yet</p>
-                            </div>
-                        }
-                    </section>
-                        </>
+                            {question[0].answer.length > 0 ?
+                                <>
+                                    <div className='forum__asks__answer' key={question[0].id}>
+                                        <i className="far fa-comment"></i>
+                                        {editing === true ?
+                                            <textarea onChange={this.handleChange} value={this.state.answer}/>
+                                            :
+                                            <p>
+                                                <span>Posted on: {question[0].answer[0]}</span><br/>
+                                                {question[0].answer[1]} <br/>
+                                                { (question[0].answer.length === 3) &&
+                                                <span className='edited'>Edited on: {question[0].answer[2]}</span>}
+                                            </p>
+                                        }
+                                    </div>
+                                    {editing === true ?
+                                        <button className='buttons__small' onClick={ () => this.handleSaveAnswer(question[0].id)}>Save</button>
+                                        :
+                                        <button className='buttons__small' onClick={this.handleAnswer}>Edit</button>
+                                    }
+                                </>
+                                :
+                                <>
+                                    <div className='forum__asks__answer' key={question[0].id}>
+                                        <i className="far fa-comment"></i>
+                                        <p>No answer yet</p>
+                                    </div>
+                                    <button className='buttons__small' onClick={this.handleAnswer}>Answer</button>
+                                </>
+                            }
+                        </section>
+                    </>
                     :
                     <div className="spinner">
                         <div className="bounce1"></div>

@@ -106,16 +106,17 @@
       font-weight: 700;
       margin: 1rem;
       display: flex;
+      width: 100%;
 
       i {
         padding-top: 1rem;
         font-size: 2rem;
-        width: 10%;
+        margin: 0 0.8rem;
       }
 
       p {
-        margin: 0 1rem;
         line-height: 1.2rem;
+        margin-right: 0.6rem;
 
         span {
           margin-bottom: 1rem;

@@ -94,36 +94,8 @@ class AsksAdmin extends Component {
         })
     };
 
-    deleteData = (id) => {
-        firebase
-            .firestore()
-            .collection("asks")
-            .where("id", "==", id)
-            .get()
-            .then( doc => {
-                doc.forEach( doc => {
-                    console.log(doc.id)
-
-                    firebase.firestore()
-                        .collection("asks")
-                        .doc(doc.id)
-                        .delete()
-                        .then( () => {
-                            console.log("Document successfully deleted!");
-                            this.setState({
-                                questions: this.state.questions.filter(item => item.id !== id)
-                            });
-                            const { history } = this.props;
-                            history.push("/admin-asks");
-                        }).catch(function(error) {
-                        console.error("Error removing document: ", error);
-                })
-            })
-        });
-    };
-
     render() {
-        const {currentPage, questionsPerPage, questions, notAnsweredQuestions, notAnsweredNo, questionId} = this.state;
+        const {currentPage, questionsPerPage, questions, notAnsweredQuestions, notAnsweredNo} = this.state;
         const indexLast = currentPage * questionsPerPage;
         const indexFirst = indexLast - questionsPerPage;
         const filterQuestions = questions.slice(indexFirst, indexLast);
@@ -168,6 +140,7 @@ class AsksAdmin extends Component {
                                     <NavLink to={`/a-asks/${question.id}`} style={style}>
                                         <div className='single'>
                                             <p className='title'>{question.tip}</p>
+                                            {question.answer.length > 0 && <p className='answered'>Answered</p>}
                                             <div className='data'>
                                                 <p>{question.login}</p>
                                                 <p>{question.date}</p>
@@ -182,14 +155,16 @@ class AsksAdmin extends Component {
                         notAnsweredQuestions.map( (question, index) => {
                             return (
                                 <section key={question.id} id={question.id} className='forum__asks__single admin'>
-                                    <div className='single'>
-                                        <p className='title'>{question.tip}</p>
-                                        <i className="fas fa-times-circle animation2" onClick={ () => this.deleteData( question.id )}></i>
-                                        <div className='data'>
-                                            <p>{question.login}</p>
-                                            <p>{question.date}</p>
+                                    <NavLink to={`/a-asks/${question.id}`} style={style}>
+                                        <div className='single'>
+                                            <p className='title'>{question.tip}</p>
+                                            {question.answer.length > 0 && <p className='answered'>Answered</p>}
+                                            <div className='data'>
+                                                <p>{question.login}</p>
+                                                <p>{question.date}</p>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </NavLink>
                                 </section>
                             )
                         })
