@@ -9,8 +9,8 @@ export default class SingleAsk extends Component {
         question: [],
         editing: false,
         answer: "",
-        date: [new Date().getDate() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getFullYear() + ' , '
-        + new Date().getHours() + ':' + new Date().getMinutes()],
+        date: [new Date().getDate() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getFullYear()],
+        time: [new Date().getHours() + ':' + new Date().getMinutes()],
     };
 
     componentDidMount() {
@@ -78,8 +78,37 @@ export default class SingleAsk extends Component {
         })
     };
 
-    handleSaveAnswer = (id) => {
-        const { question, answer, date } = this.state;
+    handleEditAnswer = (id) => {
+        const { question, answer, date, time } = this.state;
+        firebase
+            .firestore()
+            .collection("asks")
+            .where("id", "==", id)
+            .get()
+            .then( doc => {
+                doc.forEach( doc => {
+                            firebase.firestore()
+                                .collection("asks")
+                                .doc(doc.id)
+                                .update({
+                                    answer: [question[0].answer[0], answer, date.toString() + ", " + time.toString()],
+                                })
+                        .then( () => {
+                            console.log("Document successfully updated!");
+                            this.setState({
+                                editing: false,
+                            });
+                            const { history } = this.props;
+                            history.push("/admin-asks");
+                        }).catch(function(error) {
+                        console.error("Error updating document: ", error);
+                    })
+                })
+            });
+    };
+
+    handleSaveAnswer =  (id) => {
+        const { answer, date } = this.state;
         firebase
             .firestore()
             .collection("asks")
@@ -91,7 +120,7 @@ export default class SingleAsk extends Component {
                         .collection("asks")
                         .doc(doc.id)
                         .update({
-                            answer: [question[0].answer[0], answer, date.toString()],
+                            answer: [date.toString(), answer],
                         })
                         .then( () => {
                             console.log("Document successfully updated!");
@@ -146,7 +175,7 @@ export default class SingleAsk extends Component {
                                         }
                                     </div>
                                     {editing === true ?
-                                        <button className='buttons__small' onClick={ () => this.handleSaveAnswer(question[0].id)}>Save</button>
+                                        <button className='buttons__small' onClick={ () => this.handleEditAnswer(question[0].id)}>Save</button>
                                         :
                                         <button className='buttons__small' onClick={this.handleAnswer}>Edit</button>
                                     }
@@ -155,9 +184,18 @@ export default class SingleAsk extends Component {
                                 <>
                                     <div className='forum__asks__answer' key={question[0].id}>
                                         <i className="far fa-comment"></i>
-                                        <p>No answer yet</p>
+                                        {editing === true ?
+                                            <textarea onChange={this.handleChange} value={this.state.answer}/>
+                                            :
+                                            <p>No answer yet</p>
+                                        }
                                     </div>
-                                    <button className='buttons__small' onClick={this.handleAnswer}>Answer</button>
+                                    {editing === true ?
+                                        <button className='buttons__small'
+                                                onClick={() => this.handleSaveAnswer(question[0].id)}>Save</button>
+                                        :
+                                        <button className='buttons__small' onClick={this.handleAnswer}>Answer</button>
+                                    }
                                 </>
                             }
                         </section>
