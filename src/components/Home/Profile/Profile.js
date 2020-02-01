@@ -225,7 +225,9 @@ class Profile extends Component {
                 <Header/>
                 <section className='profile'>
                     <div className='profile__photo'>
-                        <div className='profile__photo__square'>{(this.state.uploading) && <img className='profile__photo__square__image' src={`${this.state.fileUrl}`} alt={'profilePhoto'}/>}</div>
+                        <div className='profile__photo__square'>{(this.state.uploading) &&
+                            <img className='profile__photo__square__image' src={`${this.state.fileUrl}`} alt={'profilePhoto'}/>}
+                        </div>
                         <form className='profile__photo__form' onSubmit={this.handleSubmit}>
                             <label htmlFor="avatar" className='label'>Choose a profile picture:</label>
                             <input type="file"
