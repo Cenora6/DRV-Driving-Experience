@@ -90,13 +90,174 @@
 
   &__date {
     width: 30%;
-
   }
 
   &__role {
     width: 10%;
+  }
 
+  &__single {
+    margin-bottom: 1rem;
+    border-bottom: 0.2rem solid $searchButton;
+  }
 
+  &__name {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem 0;
+  }
+
+  &__tag {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    button {
+      width: 90%;
+    }
+  }
+
+  &__single__tip {
+    h2 {
+      margin: 0.5rem 0;
+      text-align: center;
+    }
+  }
+
+  &__add {
+
+    &__title {
+      h2 {
+        text-align: center;
+        margin-top: 1rem;
+        margin-bottom: 2rem;
+      }
+    }
+
+    &__main {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      margin-left: 1rem;
+
+      p {
+        width: 100%;
+        margin-bottom: 2rem;
+        font-weight: 600;
+      }
+
+      input {
+        width: 90%;
+        font-family: $font-base;
+        opacity: 0.7;
+        border-left: none;
+        border-right: none;
+        border-top: none;
+        margin-bottom: 1rem;
+        padding: 0.5rem;
+      }
+
+      label {
+        margin: 1rem 0;
+        font-weight: 600;
+      }
+
+      &__details {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+
+        textarea {
+          opacity: 0.7;
+          padding: 0.5rem;
+          font-family: $font-base;
+          width: 90%;
+          height: 10rem;
+          resize: none;
+        }
+      }
+
+      &__photo {
+        width: 100%;
+        display: flex;
+
+        input[type=file] {
+          color: white;
+          margin-right: -10.5rem;
+          margin-left: 1rem;
+          margin-top: -0.6rem;
+        }
+
+        span {
+          font-size: 0.8rem;
+          margin-right: 2rem;
+          margin-top: 0.8rem;
+          text-align: right;
+        }
+      }
+
+      &__photodetails {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+
+        span {
+          margin-bottom: 0.5rem;
+        }
+      }
+
+      &__tags {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+
+        &__add {
+          display: flex;
+          justify-content: space-between;
+          margin: 0 4rem;
+          align-items: center;
+
+          input {
+            width: 50%;
+          }
+
+          button {
+            width: 5rem;
+          }
+        }
+
+        &__show {
+          display: flex;
+          justify-content: space-between;
+
+          input {
+            width: 80%;
+            margin: 0.5rem 2rem 1rem 0;
+          }
+        }
+      }
+
+      &__test {
+        width: 100%;
+
+        &__answers {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 1rem;
+          border-bottom: 0.1rem solid $searchButton;
+
+          &__single {
+            display: flex;
+            width: 70%;
+          }
+
+        }
+      }
+    }
   }
 }
 
@@ -185,7 +346,6 @@
     flex-direction: column;
   }
 
-
   textarea {
     width: 90%;
     margin: 1rem auto;
@@ -195,5 +355,4 @@
     height: 5rem;
     resize: none;
   }
-
 }
