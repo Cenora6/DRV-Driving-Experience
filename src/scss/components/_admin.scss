@@ -181,13 +181,14 @@
 
       &__photo {
         width: 100%;
-        display: flex;
 
         input[type=file] {
           color: white;
-          margin-right: -10.5rem;
           margin-left: 1rem;
-          margin-top: -0.6rem;
+          margin-bottom: -2rem;
+          margin-top: -1.5rem;
+          width: 20%;
+          vertical-align: text-top;
         }
 
         span {
@@ -195,6 +196,7 @@
           margin-right: 2rem;
           margin-top: 0.8rem;
           text-align: right;
+          margin-left: 1rem;
         }
       }
 
@@ -232,9 +234,18 @@
           display: flex;
           justify-content: space-between;
 
+          i {
+            color: $deleteIcon;
+            cursor: pointer;
+            vertical-align: sub;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            margin-right: 1rem;
+          }
+
           input {
-            width: 80%;
-            margin: 0.5rem 2rem 1rem 0;
+            width: 70%;
+            margin: 0.5rem 1rem 1rem 0;
           }
         }
       }
@@ -253,8 +264,30 @@
           &__single {
             display: flex;
             width: 70%;
-          }
 
+            span {
+              padding-top: 0.5rem;
+            }
+
+            &__photo {
+              display: flex;
+              width: 50%;
+              justify-content: center;
+              align-items: center;
+
+              span {
+                width: 50%;
+                margin-bottom: 1rem;
+                font-size: 0.8rem;
+              }
+
+              input {
+                color: white;
+                width: 50%;
+                margin: 0;
+              }
+            }
+          }
         }
       }
     }

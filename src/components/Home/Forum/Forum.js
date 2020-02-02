@@ -172,9 +172,10 @@ class Forum extends Component {
                         </ul>
                         { (this.state.pageCounter === 0) &&
                         filterQuestions.map( (question, index) => {
-                            if(question.answer.length > 0) {
-                                return (
-                                    <section key={index} className='forum__asks__single'>
+                            return (
+                                <section key={index} className='forum__asks__single'>
+                                    { (question.answer.length > 0) &&
+                                    <>
                                         <div className='single'>
                                             <p className='title'>{question.tip}</p>
                                             <ReadMoreReact text={`${question.question}`}
@@ -193,16 +194,18 @@ class Forum extends Component {
                                                 {question.answer[1]}
                                             </p>
                                         </div>
-                                    </section>
-                                )
-                            }
+                                    </>
+                                    }
+                                </section>
+                            )
                         })
                         }
                         {(this.state.pageCounter === 1) &&
                         userQuestions.map( (question, index) => {
-                                if(question.answer.length > 0) {
-                                    return (
-                                        <section key={index} className='forum__asks__single'>
+                                return (
+                                    <section key={index} className='forum__asks__single'>
+                                        {question.answer.length > 0 &&
+                                        <>
                                             <div className='single'>
                                                 <p className='title'>{question.tip}</p>
                                                 <ReadMoreReact text={`${question.question}`}
@@ -221,14 +224,17 @@ class Forum extends Component {
                                                     {question.answer[1]}
                                                 </p>
                                             </div>
-                                        </section>
-                                    )}
+                                        </>
+                                        }
+                                    </section>
+                                )
                             }
                         )}
                         {(this.state.pageCounter === 2) &&
                         tagQuestions.map( (question, index) => {
-                            if(question.answer.length > 0) {
-                                return (
+                            return (
+                                <>
+                                    {question.answer.length > 0 &&
                                     <section key={index} className='forum__asks__single'>
                                         <div className='single'>
                                             <p className='title'>{question.tip}</p>
@@ -249,8 +255,9 @@ class Forum extends Component {
                                             </p>
                                         </div>
                                     </section>
-                                )
-                            }
+                                    }
+                                </>
+                            )
                         })
                         }
 
