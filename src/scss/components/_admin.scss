@@ -292,6 +292,83 @@
       }
     }
   }
+
+  &__tips__edit {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    input {
+      width: 90%;
+      font-family: $font-base;
+      opacity: 0.7;
+      border-left: none;
+      border-right: none;
+      border-top: none;
+      margin-bottom: 1rem;
+      padding: 0.5rem;
+    }
+
+    textarea {
+      opacity: 0.7;
+      padding: 0.5rem;
+      font-family: $font-base;
+      width: 90%;
+      height: 20rem;
+      resize: none;
+    }
+
+    label {
+      margin: 1rem 0;
+      font-weight: 600;
+    }
+
+    &__title {
+      width: 90%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    &__description {
+      width: 90%;
+      display: flex;
+      flex-direction: column;
+
+      &__photo {
+
+        i {
+          color: $deleteIcon;
+        }
+      }
+
+      &__tags {
+
+        padding: 1rem 0;
+        &__add {
+          display: flex;
+
+        }
+
+        &__show {
+
+          input {
+            width: 85%;
+            margin: 1rem 0.5rem 1rem 0;
+          }
+
+          i {
+            color: $deleteIcon;
+          }
+
+        }
+      }
+    }
+
+  }
+
+
 }
 
 .loading {

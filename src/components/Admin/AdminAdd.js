@@ -222,7 +222,7 @@ class AdminAdd extends Component {
                                 </ReactTooltip>
                             </div>
                             <div className='admin__add__main__tags__add'>
-                                <input type="text" id="tagadd" name="tagadd" value={tagValue} onChange={this.handleTagChange}/>
+                                <input type="text" id="tags" name="tags" value={tagValue} onChange={this.handleTagChange}/>
                                 <button className='buttons__small' onClick={(e) => this.addTag (e, this.state.tagValue)}>Add</button>
                             </div>
                         </div>
