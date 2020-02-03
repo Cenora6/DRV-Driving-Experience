@@ -3,12 +3,12 @@ import Header from "./../Header";
 import WelcomeFooter from "../../Welcome/WelcomeFooter";
 import ReadMoreReact from 'read-more-react';
 import {firebase} from "../../firebase/firebase";
-import tips from './../../Database/tips'
 import {SlideDown} from 'react-slidedown'
 import 'react-slidedown/lib/slidedown.css'
 
 class Forum extends Component {
     state = {
+        tips: [],
         questions: [],
         currentPage: 1,
         questionsPerPage: 3,
@@ -22,7 +22,27 @@ class Forum extends Component {
 
     componentDidMount() {
         this.handleAllAsks();
+        this.getAllTips();
     }
+
+    getAllTips = () => {
+        firebase
+            .firestore()
+            .collection("tips")
+            .get()
+            .then((doc) => {
+                const array = [];
+
+                doc.forEach((doc) => {
+                    const data = doc.data();
+                    array.push(data);
+                });
+
+                this.setState({
+                    tips: array,
+                })
+            });
+    };
 
     handleAllAsks = () => {
         firebase
@@ -89,7 +109,6 @@ class Forum extends Component {
                     if(doc.data().answer.length !== 0) {
                         array.push(data);
                     }
-                    array.push(data);
                 });
                 array.reverse();
                 this.setState({
@@ -124,10 +143,12 @@ class Forum extends Component {
     };
 
     render() {
-        const {currentPage, questionsPerPage, questions, display, userQuestions, tagQuestions, clicked} = this.state;
+        const {currentPage, questionsPerPage, questions, display, userQuestions, tagQuestions, clicked, tips} = this.state;
         const indexLast = currentPage * questionsPerPage;
         const indexFirst = indexLast - questionsPerPage;
         const filterQuestions = questions.slice(indexFirst, indexLast);
+        const userFilterQuestions = userQuestions.slice(indexFirst, indexLast);
+        const tagFilterQuestions = tagQuestions.slice(indexFirst, indexLast);
 
         const buttonCount = Math.ceil(parseInt(questions.length)/parseInt(questionsPerPage));
         const buttonUserCount = Math.ceil(parseInt(userQuestions.length)/parseInt(questionsPerPage));
@@ -148,14 +169,16 @@ class Forum extends Component {
                         <h2>Asks</h2>
                         <ul className='forum__asks__tags'>
                             <span className='buttons__small tag' onClick={this.handleShow}>Tips</span>
-                            {tips.tips.map( (tip, index) => {
-                                return (
-                                    <SlideDown className={'my-dropdown-slidedown'} key={index}>
-                                        {this.props.open ? this.props.children : null}
-                                        <li className={ (display === false || clicked === true) && "hidden"} key={index} onClick={this.handleTags}>{tip.title}</li>
-                                    </SlideDown>
-                                )
-                            })}
+                            { tips.length > 0 && (
+                                tips.map( (tip, index) => {
+                                        return (
+                                            <SlideDown className={'my-dropdown-slidedown'} key={index}>
+                                                {this.props.open ? this.props.children : null}
+                                                <li className={ (display === false || clicked === true) ? "hidden" : null} key={index} onClick={this.handleTags}>{tip.title}</li>
+                                            </SlideDown>
+                                        )
+                                    })
+                            )}
                             <span className='buttons__small tag' onClick={this.handleYourShow}>Your questions</span>
                             <span className='buttons__small tag' onClick={this.handleAllAsks}>All</span>
                         </ul>
@@ -201,7 +224,7 @@ class Forum extends Component {
                         })
                         }
                         {(this.state.pageCounter === 1) &&
-                        userQuestions.map( (question, index) => {
+                        userFilterQuestions.map( (question, index) => {
                                 return (
                                     <section key={index} className='forum__asks__single'>
                                         {question.answer.length > 0 &&
@@ -231,7 +254,7 @@ class Forum extends Component {
                             }
                         )}
                         {(this.state.pageCounter === 2) &&
-                        tagQuestions.map( (question, index) => {
+                        tagFilterQuestions.map( (question, index) => {
                             return (
                                 <>
                                     {question.answer.length > 0 &&

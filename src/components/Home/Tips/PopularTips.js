@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
-import tips from './../../Database/tips'
 import {NavLink} from "react-router-dom";
+import {firebase} from "../../firebase/firebase";
 
 class PopularTips extends Component {
     state = {
@@ -10,19 +10,31 @@ class PopularTips extends Component {
     };
 
     componentDidMount() {
-        for (let i = 0; i < tips.tips.length; i++) {
-            const singleTip = tips.tips;
-
-            singleTip.sort( (a, b) => {
-                return b.likes - a.likes;
-            });
-            const popularTip = [ singleTip[0], singleTip[1], singleTip[2] ];
-
-            this.setState({
-                popular: popularTip,
-            })
-        }
+        this.getPopularTips();
     }
+
+    getPopularTips = () => {
+        firebase
+            .firestore()
+            .collection("tips")
+            .get()
+            .then( (doc) => {
+                const array = [];
+
+                doc.forEach((doc) => {
+                    const data = doc.data();
+                    array.push(data);
+
+                    array.sort( (a, b) => {
+                        return b.likes - a.likes;
+                    });
+
+                    this.setState({
+                        popular: array.slice(0, 3),
+                    });
+                });
+            });
+    };
 
     render() {
         const {popular} = this.state;

@@ -99,6 +99,7 @@ class AsksAdmin extends Component {
         const filterQuestions = questions.slice(indexFirst, indexLast);
         const buttonCount = Math.ceil(parseInt(questions.length)/parseInt(questionsPerPage));
         const buttonNotAnsweredCount = Math.ceil(parseInt(notAnsweredQuestions.length)/parseInt(questionsPerPage));
+        const notAnsweredFilterQuestions = notAnsweredQuestions.slice(indexFirst, indexLast);
 
         let buttonList;
         let buttonNotAnswered;
@@ -150,10 +151,10 @@ class AsksAdmin extends Component {
                         })
                         }
                         {(this.state.pageCounter === 1) &&
-                        notAnsweredQuestions.map( (question, index) => {
+                        notAnsweredFilterQuestions.map( (question, index) => {
                             return (
                                 <section key={question.id} id={question.id} className='forum__asks__single admin'>
-                                    <NavLink to={`/a-asks/${question.id}`} style={style}>
+                                    <NavLink to={`/asks/${question.id}`} style={style}>
                                         <div className='single'>
                                             <p className='title'>{question.tip}</p>
                                             {question.answer.length > 0 && <p className='answered'>Answered</p>}

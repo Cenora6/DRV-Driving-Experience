@@ -158,7 +158,8 @@ class AdminAdd extends Component {
                         "questions": [this.state.question1, this.state.question2, this.state.file2B, this.state.question3],
                         "answers1": this.state.answers1,
                         "answers2": this.state.answers2,
-                        "answers3": this.state.answers3,                    }
+                        "answers3": this.state.answers3,
+                    }
                 ]
             }
         )

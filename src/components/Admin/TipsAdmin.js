@@ -1,13 +1,44 @@
 import React, {Component} from 'react';
 import WelcomeFooter from "../Welcome/WelcomeFooter";
 import Header from "../Home/Header";
-import tips from "./../Database/tips"
 import ReadMoreReact from 'read-more-react';
 import {NavLink} from "react-router-dom";
+import {firebase} from "../firebase/firebase";
 
 class TipsAdmin extends Component {
     state = {
         tips: [],
+    };
+
+    componentDidMount() {
+        this.getTips();
+    }
+
+    getTips = () => {
+        firebase.firestore()
+            .collection("tips")
+            .orderBy("id", "desc");
+
+        firebase
+            .firestore()
+            .collection("tips")
+            .get()
+            .then( (doc) => {
+                const array = [];
+
+                doc.forEach((doc) => {
+                    const data = doc.data();
+                    array.push(data);
+
+                    array.sort( (a, b) => {
+                        return b.id - a.id;
+                    });
+
+                    this.setState({
+                        tips: array,
+                    });
+                });
+            });
     };
 
     render() {
@@ -16,6 +47,8 @@ class TipsAdmin extends Component {
             color: "#000",
             width: "100%",
         };
+        const { tips } = this.state;
+        console.log(tips)
         return (
             <>
                 <Header/>
@@ -31,7 +64,7 @@ class TipsAdmin extends Component {
                     </NavLink>
                 </section>
 
-                {tips.tips.map( (tip, index) => {
+                {tips.map( (tip, index) => {
                     return (
                         <section className='tips admin' key={index}>
                             <div className='tips__single  admin__single'>
