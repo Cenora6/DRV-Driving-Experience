@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import WelcomeFooter from "../Welcome/WelcomeFooter";
 import Header from "../Home/Header";
 import {firebase} from "../firebase/firebase";
+import {NavLink} from "react-router-dom";
 
 class AdminQuestions extends Component {
     state = {
@@ -67,6 +68,10 @@ class AdminQuestions extends Component {
 
         let buttonList;
         buttonList = this.showButtons(buttonCount);
+        const style = {
+            color: "#000",
+            textDecoration: "none",
+        };
         return (
             <>
                 <Header/>
@@ -77,9 +82,11 @@ class AdminQuestions extends Component {
                         {filterQuestions.map((question, index) => {
                             return (
                                 <section className='forum__asks__single admin' key={index}>
-                                    <div className='single animation'>
-                                        <p>{question.title}</p>
-                                    </div>
+                                    <NavLink to={`/admintest/${question.id}`} style={style}>
+                                        <div className='single animation'>
+                                            <p>{question.title}</p>
+                                        </div>
+                                    </NavLink>
                                 </section>
                             )
                         })

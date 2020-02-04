@@ -24,6 +24,7 @@ import AsksAdmin from "./components/Admin/AsksAdmin";
 import SingleAsk from "./components/Admin/SingleAsk";
 import SingleTip from "./components/Admin/SingleTip";
 import AdminAdd from "./components/Admin/AdminAdd";
+import SingleQuestion from "./components/Admin/SingleQuestion";
 
 class App extends Component {
 
@@ -49,7 +50,8 @@ class App extends Component {
                         <PrivateRoute path='/profile' component={Profile} />
 
                         {/*AdminRoute*/}
-                        <PrivateRoute path='/admin-questions' component={AdminQuestions} />
+                        <PrivateRoute path='/admin-test' component={AdminQuestions} />
+                        <PrivateRoute path='/admintest/:id' component={SingleQuestion} />
                         <PrivateRoute path='/admin-users' component={UsersAdmin} />
                         <PrivateRoute path='/admin-asks' component={AsksAdmin} />
                         <PrivateRoute path='/asks/:id' component={SingleAsk} />
