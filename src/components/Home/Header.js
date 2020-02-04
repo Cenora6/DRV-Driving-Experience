@@ -68,8 +68,7 @@ class Header extends Component {
                     <img src={logo} alt={'driving'} className='header__logo'/>
                     <div className='header__user'>
                         <p className='header__user__name'>{firebase.auth().currentUser.displayName}</p>
-                        <NavLink style={profileLink} to='/profile'><span className='header__user__desc'> profile</span></NavLink>
-                        <span> | </span>
+                        <NavLink style={profileLink} to='/profile'><span className='header__user__desc'> profile | </span></NavLink>
                         <span className='header__user__desc' onClick={this.handleLogOut}> logout</span>
                         {(sessionStorage.getItem("role") === "user") ?
                             <p className='header__user__desc'>points {this.state.userPoints}</p> :

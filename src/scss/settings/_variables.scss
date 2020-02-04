@@ -74,6 +74,9 @@ h2 {
   text-transform: uppercase;
   font-weight: 700;
   font-size: 1.5rem;
+  @include phone {
+    text-align: center;
+  }
 }
 
 h3 {
@@ -82,6 +85,16 @@ h3 {
   background-color: $tipsHeaderBackground;
   color: $altTextColor;
   margin-bottom: 1rem;
+}
+
+.margin__h3 {
+  @include phone {
+    margin-top: 3rem;
+  }
+}
+
+.header__h3 {
+  height: 4rem;
 }
 
 .radio {

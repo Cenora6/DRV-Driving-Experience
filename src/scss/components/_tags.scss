@@ -21,8 +21,17 @@
       display: flex;
       height: 100%;
 
+      @include phone {
+        flex-direction: column;
+      }
+
       img {
         width: 50%;
+
+        @include phone {
+          width: 100%;
+        }
+
       }
 
       &__text {

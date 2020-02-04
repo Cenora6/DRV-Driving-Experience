@@ -37,6 +37,10 @@ class Forum extends Component {
                     array.push(data);
                 });
 
+                array.sort( (a, b) => {
+                    return b.id - a.id;
+                });
+
                 this.setState({
                     tips: array,
                 })
@@ -81,6 +85,9 @@ class Forum extends Component {
                         onClick={ (e) => this.onClickPageNumber(e, i)}
                         className={`${this.state.currentPage === i ? "buttons__small" : "forum__asks__pages__buttons"} animation pagination`}></button>
             );
+        }
+        if(buttonCount === 1) {
+            return null;
         }
         return buttons;
     };

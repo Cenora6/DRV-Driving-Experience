@@ -1,6 +1,11 @@
 .profile {
   display: flex;
 
+  @include phone {
+    flex-direction: column;
+    align-items: center;
+  }
+
   input {
     font-family: $font-base;
     opacity: 0.7;
@@ -26,17 +31,33 @@
     margin: 2rem;
     width: 50%;
 
+    @include phone {
+      width: 90%;
+      align-items: center;
+    }
+
     &__square {
       width: 10rem;
       height: 10rem;
       background-color: $forumMenu;
       border: 0.15rem solid $mainTextColor;
 
+      @include phone {
+        width: 15rem;
+        height: 15rem;
+
+      }
+
       &__image {
         object-fit: cover;
         width: 10rem;
         height: 10rem;
         object-position: 50% 0;
+
+        @include phone {
+          width: 100%;
+          height: 100%;
+        }
       }
     }
 
@@ -69,10 +90,20 @@
     width: 50%;
     margin: 0 1rem;
 
+    @include phone {
+      width: 100%;
+    }
+
     &__login {
       margin-top: 2rem;
       display: flex;
       flex-direction: column;
+
+      @include phone {
+        margin: 0 auto;
+        width: 80%;
+      }
+
       input {
         margin: 1rem 0;
         padding: 0.5rem;
@@ -84,6 +115,11 @@
       display: flex;
       flex-direction: column;
 
+      @include phone {
+        margin: 0 auto;
+        width: 80%;
+      }
+
       input {
         margin: 1rem 0;
         padding: 0.5rem;
@@ -93,6 +129,11 @@
     &__gender {
       display: flex;
       flex-direction: column;
+
+      @include phone {
+        margin: 0 auto;
+        width: 80%;
+      }
 
       label {
         margin: 1.2rem 2rem;
@@ -118,6 +159,10 @@
     width: 90%;
     height: 5rem;
     resize: none;
+
+    @include phone {
+      height: 15rem;
+    }
   }
 }
 

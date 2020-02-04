@@ -239,7 +239,6 @@ export default class AllTips extends Component {
         const shareUrl = 'https://github.com/Cenora6';
         const title = 'Visit Cenora6 on Github';
 
-
         return (
             <>
                 <Header/>

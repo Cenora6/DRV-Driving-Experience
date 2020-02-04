@@ -26,6 +26,10 @@
     background-color: rgba(169,169,169, 0.6);
     border: 3px outset rgba(101,62,146, 0.7);
 
+    @include phone {
+      width: 90%;
+    }
+
     label {
       margin: 2rem 3rem 1rem 3rem;
       font-size: 1.2rem;

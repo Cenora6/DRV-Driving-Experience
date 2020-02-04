@@ -15,6 +15,22 @@
         position: absolute;
         right: 1rem;
       }
+
+      @include phone {
+        justify-content: flex-start;
+        flex-direction: column;
+        height: 100%;
+
+        h2 {
+          margin-top: 2rem;
+        }
+
+        span {
+          right: 0;
+          position: relative;
+          margin-bottom: 1rem;
+        }
+      }
     }
 
     &__description {
@@ -40,6 +56,19 @@
         align-items: center;
         background-color: $mainTextColor;
         height: 3rem;
+
+        @include phone {
+          flex-wrap: wrap;
+          justify-content: center;
+          padding: 0.5rem 1rem;
+
+          li {
+            display: flex;
+            span {
+              margin-right: 0.5rem;
+            }
+          }
+        }
 
         i {
           margin-left: 1rem;
@@ -79,6 +108,12 @@
     justify-content: space-evenly;
     margin: 1rem;
 
+    @include phone {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
     span {
       margin: 0.5rem 0;
     }
@@ -107,6 +142,10 @@
     align-items: center;
     margin: 2rem 0;
 
+    @include phone {
+      display: block;
+    }
+
     .slide {
       background-color: $altTextColor;
     }
@@ -120,7 +159,7 @@
       border: 0.2rem solid $altTextColor;
 
       img {
-        height: 18rem;
+          height: 100%;
       }
     }
   }

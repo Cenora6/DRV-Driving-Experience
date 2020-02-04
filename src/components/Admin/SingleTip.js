@@ -66,12 +66,6 @@ class SingleTip extends Component {
         })
     };
 
-    handleAllTagsChange = (e) => {
-        this.setState({
-            tags: e.target.value,
-        })
-    };
-
     handleTagAdd = (e) => {
         this.setState({
             tagValue: e.target.value,
@@ -96,7 +90,7 @@ class SingleTip extends Component {
 
     handleSave = (e, index) => {
         e.preventDefault();
-        const {title, description, tags} = this.state;
+        const {title, description, tags, photoVideo} = this.state;
         firebase
             .firestore()
             .collection("tips")
@@ -110,6 +104,7 @@ class SingleTip extends Component {
                         .update({
                             title: title,
                             description: description,
+                            photovideo: photoVideo,
                             tags: tags,
                         })
                         .then( () => {
@@ -158,10 +153,9 @@ class SingleTip extends Component {
                                             back
                                         </button>
                                     </NavLink>
-                                    <span>{singleTip[0].added}</span>
                                 </div>
                                 <div className='tips__week__description'>
-                                    <h3>{singleTip[0].title}</h3>
+                                    <h3 className='margin__h3'>{singleTip[0].title}</h3>
                                     <img src={singleTip[0].photovideo} alt='weekly-tip'/>
                                     <p>
                                         {singleTip[0].description}
