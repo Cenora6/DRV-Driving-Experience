@@ -1,5 +1,4 @@
 .admin {
-
   .single {
     margin: 0;
 
@@ -168,6 +167,24 @@
         flex-direction: column;
         width: 100%;
 
+        &__title {
+          display: flex;
+
+          input {
+            width: 80%;
+          }
+
+          &__id {
+            width: 10%;
+            height: 2.5rem;
+            opacity: 0.5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+
+        }
+
         textarea {
           opacity: 0.7;
           padding: 0.5rem;
@@ -270,20 +287,19 @@
 
             &__photo {
               display: flex;
-              width: 50%;
+              width: 70%;
               justify-content: center;
               align-items: center;
 
               span {
-                width: 50%;
+                width: 40%;
                 margin-bottom: 1rem;
                 font-size: 0.8rem;
               }
 
               input {
-                color: white;
                 width: 50%;
-                margin: 0;
+                margin-bottom: 0.5rem;
               }
             }
           }

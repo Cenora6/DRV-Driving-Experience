@@ -234,7 +234,6 @@ export default class AllTips extends Component {
         };
 
         const { tips } = this.state;
-        console.log(tips)
 
         const clicked = {color: "#663FB6", fontSize: "2.5rem"};
         const shareUrl = 'https://github.com/Cenora6';
@@ -279,12 +278,12 @@ export default class AllTips extends Component {
                                 <div className='tips__week__description__sharing__likes'>
                                     <i className="fas fa-thumbs-up animation" style={this.state.clicked ? clicked : null}
                                        onClick={this.handleLike}></i>
-                                    <span>{parseInt(tips.likes) + parseInt(this.state.likeCount)}</span>
+                                    <span>{parseInt(tips[i - 1].likes) + parseInt(this.state.likeCount)}</span>
                                 </div>
                                 <div className='tips__week__description__sharing__share'>
                                     <i className="fas fa-share-alt animation"  style={this.state.clickedShare ? clicked : null}
                                        onClick={this.handleShare}></i>
-                                    <span>{parseInt(tips.share) + parseInt(this.state.shareCount)}</span>
+                                    <span>{parseInt(tips[i - 1].share) + parseInt(this.state.shareCount)}</span>
                                 </div>
                                 {this.state.shareWindow &&
                                 <div className='shares'>

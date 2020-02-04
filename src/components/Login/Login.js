@@ -65,7 +65,7 @@ class Login extends Component {
                                     history.push("/home");
                                 } else if (role === "admin") {
                                     sessionStorage.setItem("role", "admin");
-                                    history.push("/admin");
+                                    history.push("/admin-users");
                                 }
                             });
                         });

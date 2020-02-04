@@ -33,7 +33,6 @@ class SingleTip extends Component {
                     const data = doc.data();
 
                     const index = this.props.match.params.id.toString();
-
                     if (data.id.indexOf(index) !== -1) {
                         array.push(data);
                     }
@@ -173,10 +172,7 @@ class SingleTip extends Component {
                                         </li>
                                         {singleTip[0].tags.map((tag, index) => {
                                             return (
-                                                <>
-                                                    <li key={index}>{tag}</li>
-                                                    <li>|</li>
-                                                </>
+                                                    <li key={index}>{tag} | </li>
                                             )
                                         })}
                                     </ul>

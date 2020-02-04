@@ -3,6 +3,7 @@ import WelcomeFooter from "../Welcome/WelcomeFooter";
 import Header from "../Home/Header";
 import {NavLink} from "react-router-dom";
 import ReactTooltip from 'react-tooltip'
+import {firebase} from "../firebase/firebase";
 
 const fileTypes = [
     'image/jpeg',
@@ -12,7 +13,9 @@ const fileTypes = [
 
 class AdminAdd extends Component {
     state = {
-        date: [],
+        id: "",
+        lastId: [],
+        date: "",
         tags: [],
         tagValue: "",
         title: "",
@@ -21,38 +24,61 @@ class AdminAdd extends Component {
         file2A: "",
         file2B: "",
         file2C: "",
-        fileName: "No file chosen",
-        fileError: false,
         question1: "",
         question2: "",
         question3: "",
-        answers1: [],
-        answers2: [],
-        answers3: [],
+        answers1a: "",
+        answers1b: "",
+        answers1c: "",
+        answers2a: "",
+        answers2b: "",
+        answers2c: "",
+        answers3a: "",
+        answers3b: "",
+        answers3c: "",
+        correct1: "",
+        correct2: "",
+        correct3: "",
+
     };
 
     componentDidMount() {
         this.handleDate();
+        this.getLastId();
     }
 
-    handleImageChange = (e) => {
-        const file = e.target.files;
+    getLastId = () => {
+        firebase
+            .firestore()
+            .collection("tips")
+            .get()
+            .then( (doc) => {
+                const array = [];
 
-        if(file.length > 0) {
-            for (let i = 0; i < file.length; i++) {
-                if (fileTypes.indexOf(file[i].type) !== -1) {
+                doc.forEach((doc) => {
+                    const data = doc.data();
+                    array.push(data);
+                });
 
+                array.sort( (a, b) => {
+                    return a.id - b.id;
+                });
+
+                const lastId = array[array.length - 1].id;
+                if(lastId.length === 1) {
+                    const last = `[0${parseInt(lastId) + 1}]`;
                     this.setState({
-                        [e.target.name]: file[i],
+                        id: parseInt(array[array.length - 1].id) + 1,
+                        lastId: last,
                     });
-
-                } else {
-                    this.setState({
-                        fileError: true,
-                    })
                 }
-            }
-        }
+            });
+    };
+
+    handleImageChange = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value,
+        })
     };
 
     handleDate = () => {
@@ -77,7 +103,7 @@ class AdminAdd extends Component {
             'December'
         ];
 
-        const date = [dayOfWeekArray[dayOfWeek] + ", " + day + ' ' + monthsArray[month] + ' ' + year];
+        const date = dayOfWeekArray[dayOfWeek] + ", " + day + ' ' + monthsArray[month] + ' ' + year;
 
         this.setState({
             date: date,
@@ -108,21 +134,9 @@ class AdminAdd extends Component {
         })
     };
 
-    handleAnswer1Change = (e) => {
+    handleAnswerChange = (e) => {
       this.setState({
-
-      })
-    };
-
-    handleAnswer2Change = (e) => {
-      this.setState({
-
-      })
-    };
-
-    handleAnswer3Change = (e) => {
-      this.setState({
-
+          [e.target.name]: e.target.value,
       })
     };
 
@@ -146,28 +160,59 @@ class AdminAdd extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
 
-        console.log(
-            {
-                "new": [
+        const {id, date, title, lastId, description, tags, fileTip, file2A, file2B, file2C, question1, question2,
+            question3, answers1a, answers1b, answers1c, answers2a, answers2b, answers2c,  answers3a, answers3b, answers3c,
+            correct1, correct2, correct3} = this.state;
+
+        firebase.firestore()
+            .collection('tips')
+            .add({
+                id: id.toString(),
+                added: date,
+                title: title + " " + lastId,
+                description: description,
+                photovideo: fileTip,
+                tags: tags,
+                likes: "0",
+                share: "0",
+                test: [
                     {
-                        "title": this.state.title,
-                        "description": this.state.description,
-                        "date": this.state.date,
-                        "tags": this.state.tags,
-                        "files": [this.state.fileTip, this.state.file2A, this.state.file2B, this.state.file2C],
-                        "questions": [this.state.question1, this.state.question2, this.state.file2B, this.state.question3],
-                        "answers1": this.state.answers1,
-                        "answers2": this.state.answers2,
-                        "answers3": this.state.answers3,
+                        question: "1. " + question1,
+                        answer1: answers1a,
+                        answer2: answers1b,
+                        answer3: answers1c,
+                        correct: correct1,
+                    },
+                    {
+                        question: "2. " + question2,
+                        answer1: [answers2a, file2A],
+                        answer2: [answers2b, file2B],
+                        answer3: [answers2c, file2C],
+                        correct: correct2,
+                    },
+                    {
+                        question: "3. " + question3,
+                        answer1: answers3a,
+                        answer2: answers3b,
+                        answer3: answers3c,
+                        correct: correct3,
                     }
                 ]
-            }
-        )
+
+            })
+            .then(function(docRef) {
+                console.log("Document successfully updated!");
+                const {history} = this.props;
+                history.push('/admin-tips')
+            })
+            .catch(function(error) {
+                console.error("Error updating document: ", error);
+            });
     };
 
 
     render() {
-        const { date, tagValue, tags, fileTip, file2A, file2B, file2C} = this.state;
+        const { date, tagValue, tags, lastId } = this.state;
         const style = {
             position: "absolute",
             top: "9rem",
@@ -186,27 +231,18 @@ class AdminAdd extends Component {
                     <form className='admin__add__main' onSubmit={this.handleSubmit}>
                         <div className='admin__add__main__details'>
                             <label htmlFor="title">Title:</label>
-                            <input type='text' id='title' onChange={this.handleTitleChange}/>
+                            <div className='admin__add__main__details__title'>
+                                <input type='text' id='title' onChange={this.handleTitleChange}/>
+                                <span className='admin__add__main__details__title__id'>{lastId}</span>
+                            </div>
                             <label htmlFor="description">Description:</label>
                             <textarea id='description' onChange={this.handleDescriptionChange}/>
                             <label htmlFor="date">Added:</label>
                             <input type='text' id='date' value={date} disabled/>
                         </div>
                         <div className='admin__add__main__photo'>
-                            <label htmlFor="tip_photo" className='label'>Photo/video:</label>
-                            <input type="file"
-                                   id="tip_photo" name="fileTip"
-                                   accept="image/png, image/jpeg"
-                                   className='custom-file-input'
-                                   onChange={ this.handleImageChange}
-                            />
-                            { (fileTip) ?
-                                fileTip.name.length > 25?
-                                    <span>{fileTip.name.slice(0, 25) + "..."}</span> :
-                                    <span>{fileTip.name}</span>
-                                :
-                                <span>{this.state.fileName}</span>
-                            }
+                            <label htmlFor="tip_photo" className='label'>Photo/video (link):</label>
+                            <input type="text" id="fileTip" name="fileTip" onChange={this.handleImageChange}/>
                         </div>
                         <div className='admin__add__main__photodetails'>
                             <span>To save the uploaded photo, click "save"</span>
@@ -234,15 +270,15 @@ class AdminAdd extends Component {
                             <div className='admin__add__main__test__answers'>
                                 <div className='admin__add__main__test__answers__single'>
                                     <span>A:</span>
-                                    <input type='text' id='1a'/>
+                                    <input type='text' id='1a' name='answers1a' onChange={this.handleAnswerChange}/>
                                 </div>
                                 <div className='admin__add__main__test__answers__single'>
                                     <span>B:</span>
-                                    <input type='text' id='1b'/>
+                                    <input type='text' id='1b' name='answers1b' onChange={this.handleAnswerChange}/>
                                 </div>
                                 <div className='admin__add__main__test__answers__single'>
                                     <span>C:</span>
-                                    <input type='text' id='1c'/>
+                                    <input type='text' id='1c' name='answers1c' onChange={this.handleAnswerChange}/>
                                 </div>
                             </div>
                             <label htmlFor="question">Question 2:</label>
@@ -251,60 +287,27 @@ class AdminAdd extends Component {
                             <div className='admin__add__main__test__answers'>
                                 <div className='admin__add__main__test__answers__single'>
                                     <span>A:</span>
-                                    <input type='text' id='2a'/>
+                                    <input type='text' id='2a' name='answers2a' onChange={this.handleAnswerChange}/>
                                 </div>
                                 <div className='admin__add__main__test__answers__single__photo'>
-                                    <input type="file"
-                                           id="2Aphoto" name="file2A"
-                                           accept="image/png, image/jpeg"
-                                           className='custom-file-input'
-                                           onChange={ this.handleImageChange }
-                                    />
-                                    { (file2A) ?
-                                        file2A.name.length > 30 ?
-                                            <span>{file2A.name.slice(0, 30) + "..."}</span> :
-                                            <span>{file2A.name}</span>
-                                        :
-                                        <span>{this.state.fileName}</span>
-                                    }
+                                    <span>Photo to answer A (link):</span>
+                                    <input type="text" id="file2A" name="file2A" onChange={this.handleImageChange}/>
                                 </div>
                                 <div className='admin__add__main__test__answers__single'>
                                     <span>B:</span>
-                                    <input type='text' id='2b'/>
+                                    <input type='text' id='2b' name='answers2b' onChange={this.handleAnswerChange}/>
                                 </div>
                                 <div className='admin__add__main__test__answers__single__photo'>
-                                    <input type="file"
-                                           id="2Bphoto" name="file2B"
-                                           accept="image/png, image/jpeg"
-                                           className='custom-file-input'
-                                           onChange={ this.handleImageChange}
-                                    />
-                                    { (file2B) ?
-                                        file2B.name.length > 30 ?
-                                            <span>{file2B.name.slice(0, 30) + "..."}</span> :
-                                            <span>{file2B.name}</span>
-                                        :
-                                        <span>{this.state.fileName}</span>
-                                    }
+                                    <span>Photo to answer B (link):</span>
+                                    <input type="text" id="file2B" name="file2B" onChange={this.handleImageChange}/>
                                 </div>
                                 <div className='admin__add__main__test__answers__single'>
                                     <span>C:</span>
-                                    <input type='text' id='2c'/>
+                                    <input type='text' id='2c' name='answers2c' onChange={this.handleAnswerChange}/>
                                 </div>
                                 <div className='admin__add__main__test__answers__single__photo'>
-                                    <input type="file"
-                                           id="2Cphoto" name="file2C"
-                                           accept="image/png, image/jpeg"
-                                           className='custom-file-input'
-                                           onChange={ this.handleImageChange }
-                                    />
-                                    { (file2C) ?
-                                        file2C.name.length > 30 ?
-                                            <span>{file2C.name.slice(0, 30) + "..."}</span> :
-                                            <span>{file2C.name}</span>
-                                        :
-                                        <span>{this.state.fileName}</span>
-                                    }
+                                    <span>Photo to answer C (link):</span>
+                                    <input type="text" id="file2C" name="file2C" onChange={this.handleImageChange}/>
                                 </div>
                             </div>
                             <label htmlFor="question">Question 3:</label>
@@ -313,15 +316,15 @@ class AdminAdd extends Component {
                             <div className='admin__add__main__test__answers'>
                                 <div className='admin__add__main__test__answers__single'>
                                     <span>A:</span>
-                                    <input type='text' id='3a'/>
+                                    <input type='text' id='3a' name='answers3a' onChange={this.handleAnswerChange}/>
                                 </div>
                                 <div className='admin__add__main__test__answers__single'>
                                     <span>B:</span>
-                                    <input type='text' id='3b'/>
+                                    <input type='text' id='3b' name='answers3b' onChange={this.handleAnswerChange}/>
                                 </div>
                                 <div className='admin__add__main__test__answers__single'>
                                     <span>C:</span>
-                                    <input type='text' id='3c'/>
+                                    <input type='text' id='3c' name='answers3c' onChange={this.handleAnswerChange}/>
                                 </div>
                             </div>
                         </div>

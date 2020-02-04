@@ -96,14 +96,14 @@ class Header extends Component {
                             </>
                             :
                             <>
-                                <NavLink to='/admin' style={linkstyle}>
-                                    <li className='links__list__forum cross__fade'>Main</li>
+                                <NavLink to='/admin-users' style={linkstyle}>
+                                    <li className='links__list__forum cross__fade'>Users</li>
                                 </NavLink>
                                 <NavLink to='/admin-tips' style={linkstyle}>
                                     <li className='links__list__advices cross__fade'>Advices</li>
                                 </NavLink>
-                                <NavLink to='/admin-users' style={linkstyle}>
-                                    <li className='links__list__forum cross__fade'>Users</li>
+                                <NavLink to='/admin-questions' style={linkstyle}>
+                                    <li className='links__list__forum cross__fade'>Questions</li>
                                 </NavLink>
                                 <NavLink to='/admin-asks' style={linkstyle}>
                                     <li className='links__list__advices cross__fade'>Asks</li>

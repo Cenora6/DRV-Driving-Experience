@@ -17,7 +17,7 @@ import MainTest from "./components/Home/Test/MainTest";
 import AllTips from "./components/Home/Tips/AllTips";
 import Tags from "./components/Home/Tags/Tags";
 import Profile from "./components/Home/Profile/Profile";
-import Admin from "./components/Admin/Admin";
+import AdminQuestions from "./components/Admin/AdminQuestions";
 import UsersAdmin from "./components/Admin/UsersAdmin";
 import TipsAdmin from "./components/Admin/TipsAdmin";
 import AsksAdmin from "./components/Admin/AsksAdmin";
@@ -49,7 +49,7 @@ class App extends Component {
                         <PrivateRoute path='/profile' component={Profile} />
 
                         {/*AdminRoute*/}
-                        <PrivateRoute path='/admin' component={Admin} />
+                        <PrivateRoute path='/admin-questions' component={AdminQuestions} />
                         <PrivateRoute path='/admin-users' component={UsersAdmin} />
                         <PrivateRoute path='/admin-asks' component={AsksAdmin} />
                         <PrivateRoute path='/asks/:id' component={SingleAsk} />

@@ -2,17 +2,17 @@ import React, {Component} from 'react';
 import WelcomeFooter from "../Welcome/WelcomeFooter";
 import Header from "../Home/Header";
 
-class Admin extends Component {
+class AdminQuestions extends Component {
 
     render() {
         return (
             <>
                 <Header/>
-                <div>this is admin page</div>
+                <div>all question</div>
                 <WelcomeFooter/>
             </>
         )
     }
 }
 
-export default Admin;
+export default AdminQuestions;
