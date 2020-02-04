@@ -6,6 +6,8 @@ import {firebase} from "../firebase/firebase";
 class UsersAdmin extends Component {
     state = {
         users: [],
+        usersPerPage: 10,
+        currentPage: 1,
         photoUrl: "",
         details: false,
         clicked: null,
@@ -138,8 +140,37 @@ class UsersAdmin extends Component {
         })
     };
 
+    onClickPageNumber = (e, i) => {
+        this.setState({
+            currentPage: i
+        });
+    };
+
+    showButtons = (buttonCount) => {
+        let buttons = [];
+        for (let i = 1; i <= buttonCount; i++) {
+            buttons.push(
+                <button key={i}
+                        onClick={ (e) => this.onClickPageNumber(e, i)}
+                        className={`${this.state.currentPage === i ? "buttons__small" : "forum__asks__pages__buttons"} animation pagination`}></button>
+            );
+        }
+        if(buttonCount === 1) {
+            return null;
+        }
+        return buttons;
+    };
+
     render() {
-        const { users, photoUrl, clicked, details, uploading, editing } = this.state;
+        const { users, photoUrl, clicked, details, uploading, editing, currentPage, usersPerPage } = this.state;
+        const indexLast = currentPage * usersPerPage;
+        const indexFirst = indexLast - usersPerPage;
+        const filterUsers = users.slice(indexFirst, indexLast);
+        const buttonCount = Math.ceil(parseInt(users.length)/parseInt(usersPerPage));
+
+        let buttonList;
+        buttonList = this.showButtons(buttonCount);
+
         return (
             <>
                 <Header/>
@@ -228,6 +259,9 @@ class UsersAdmin extends Component {
                             )
                         })
                         }
+                    </div>
+                    <div className='forum__asks__pages'>
+                        {buttonList}
                     </div>
                 </section>
                 <WelcomeFooter/>

@@ -5,12 +5,6 @@ import {NavLink} from "react-router-dom";
 import ReactTooltip from 'react-tooltip'
 import {firebase} from "../firebase/firebase";
 
-const fileTypes = [
-    'image/jpeg',
-    'image/jpeg',
-    'image/png'
-];
-
 class AdminAdd extends Component {
     state = {
         id: "",

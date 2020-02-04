@@ -12,7 +12,6 @@ class Forum extends Component {
         questions: [],
         currentPage: 1,
         questionsPerPage: 3,
-        buttons: 3,
         display:  false,
         clicked:  false,
         userQuestions: [],

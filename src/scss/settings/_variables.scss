@@ -156,6 +156,7 @@ h3 {
 
 .animation {
   transition: opacity .15s ease-in-out;
+  cursor: pointer;
 
   &:hover {
     opacity: 0.5;

@@ -73,6 +73,9 @@ class AsksAdmin extends Component {
                         className={`${this.state.currentPage === i ? "buttons__small" : "forum__asks__pages__buttons"} animation pagination`}></button>
             );
         }
+        if(buttonCount === 1) {
+            return null;
+        }
         return buttons;
     };
 
