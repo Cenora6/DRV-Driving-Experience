@@ -150,7 +150,7 @@ class Register extends Component {
                             <span data-for='error__login' data-tip="">
                                 <img className='error__icon' src={errorIcon} alt='error'/>
                             </span>
-                            <ReactTooltip className='error__class' id='error__login' type='error' delayHide={2000} effect='solid'>
+                            <ReactTooltip className='error__class' id='error__login' type='error' delayHide={2000} effect='solid' place='right'>
                                 <span>Login should have at least <br/> 3 characters.</span>
                             </ReactTooltip>
                         </>
@@ -164,7 +164,7 @@ class Register extends Component {
                             <span data-for='error__email' data-tip="">
                                 <img className='error__icon' src={errorIcon} alt='error'/>
                             </span>
-                            <ReactTooltip className='error__class' id='error__email' type='error' delayHide={2000} effect='solid'>
+                            <ReactTooltip className='error__class' id='error__email' type='error' delayHide={2000} effect='solid' place='right'>
                                 <span>Email should have @.</span>
                             </ReactTooltip>
                         </>
@@ -177,7 +177,7 @@ class Register extends Component {
                             <span data-for='error__password' data-tip="">
                                 <img className='error__icon' src={errorIcon} alt='error'/>
                             </span>
-                            <ReactTooltip className='error__class' id='error__password' type='error' delayHide={2000} effect='solid'>
+                            <ReactTooltip className='error__class' id='error__password' type='error' delayHide={2000} effect='solid' place='right'>
                                 <span>Password should have<br/> more than 6 characters.</span>
                             </ReactTooltip>
                         </>
@@ -190,7 +190,7 @@ class Register extends Component {
                             <span data-for='error__password2' data-tip="">
                                 <img className='error__icon' src={errorIcon} alt='error'/>
                             </span>
-                            <ReactTooltip className='error__class' id='error__password2' type='error' delayHide={2000} effect='solid'>
+                            <ReactTooltip className='error__class' id='error__password2' type='error' delayHide={2000} effect='solid' place='right'>
                                 <span>Passwords are not the same.</span>
                             </ReactTooltip>
                         </>

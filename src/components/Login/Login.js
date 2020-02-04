@@ -110,7 +110,7 @@ class Login extends Component {
                             <span data-for='error__email' data-tip="">
                                 <img className='error__icon' src={errorIcon} alt='error'/>
                             </span>
-                            <ReactTooltip className='error__class' id='error__email' type='error' delayHide={2000} effect='solid'>
+                            <ReactTooltip className='error__class' id='error__email' type='error' delayHide={2000} effect='solid' place='right'>
                                 <span>Wrong email</span>
                             </ReactTooltip>
                         </>
@@ -132,7 +132,7 @@ class Login extends Component {
                                     <button className='buttons__small' type="submit" value="Submit"
                                             onClick={this.handleFormSubmit}>Login</button>
                                     </span>
-                                    <ReactTooltip className='error__class' id='error__login' type='error' delayHide={2000} effect='solid'>
+                                    <ReactTooltip className='error__class' id='error__login' type='error' delayHide={2000} effect='solid' place='right'>
                                         <span>{this.state.errorText}</span>
                                     </ReactTooltip>
                                 </>
