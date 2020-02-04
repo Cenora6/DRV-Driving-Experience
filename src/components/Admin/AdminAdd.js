@@ -134,6 +134,12 @@ class AdminAdd extends Component {
       })
     };
 
+    handleCorrectChange = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value,
+        })
+    };
+
     addTag = (e) => {
         e.preventDefault();
         if(this.state.tagValue !== "") {
@@ -274,6 +280,10 @@ class AdminAdd extends Component {
                                     <span>C:</span>
                                     <input type='text' id='1c' name='answers1c' onChange={this.handleAnswerChange}/>
                                 </div>
+                                <div className='admin__add__main__test__answers__single'>
+                                    <span>Correct:</span>
+                                    <input type='text' id='correct2' name='correct2' value={this.state.correct1} onChange={this.handleCorrectChange}/>
+                                </div>
                             </div>
                             <label htmlFor="question">Question 2:</label>
                             <input type='text' id='question2' name='question2' onChange={this.handleQuestionChange}/>
@@ -303,6 +313,10 @@ class AdminAdd extends Component {
                                     <span>Photo to answer C (link):</span>
                                     <input type="text" id="file2C" name="file2C" onChange={this.handleImageChange}/>
                                 </div>
+                                <div className='admin__add__main__test__answers__single'>
+                                    <span>Correct:</span>
+                                    <input type='text' id='correct2' name='correct2' value={this.state.correct2} onChange={this.handleCorrectChange}/>
+                                </div>
                             </div>
                             <label htmlFor="question">Question 3:</label>
                             <input type='text' id='question3' name='question3' onChange={this.handleQuestionChange}/>
@@ -319,6 +333,10 @@ class AdminAdd extends Component {
                                 <div className='admin__add__main__test__answers__single'>
                                     <span>C:</span>
                                     <input type='text' id='3c' name='answers3c' onChange={this.handleAnswerChange}/>
+                                </div>
+                                <div className='admin__add__main__test__answers__single'>
+                                    <span>Correct:</span>
+                                    <input type='text' id='correct3' name='correct3' value={this.state.correct3} onChange={this.handleCorrectChange}/>
                                 </div>
                             </div>
                         </div>

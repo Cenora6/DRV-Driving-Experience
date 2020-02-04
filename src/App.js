@@ -49,16 +49,14 @@ class App extends Component {
                         <PrivateRoute path='/tags/:id' component={Tags} />
                         <PrivateRoute path='/profile' component={Profile} />
 
-                        {/*AdminRoute*/}
-                        <PrivateRoute path='/admin-test' component={AdminQuestions} />
-                        <PrivateRoute path='/admintest/:id' component={SingleQuestion} />
-                        <PrivateRoute path='/admin-users' component={UsersAdmin} />
-                        <PrivateRoute path='/admin-asks' component={AsksAdmin} />
-                        <PrivateRoute path='/asks/:id' component={SingleAsk} />
-                        <PrivateRoute path='/admin-tips' component={TipsAdmin} />
-                        <PrivateRoute path='/admintips/:id' component={SingleTip} />
-                        <PrivateRoute path='/add' component={AdminAdd} />
-
+                        <AdminRoute path='/admin-test' component={AdminQuestions} />
+                        <AdminRoute path='/admintest/:id' component={SingleQuestion} />
+                        <AdminRoute path='/admin-users' component={UsersAdmin} />
+                        <AdminRoute path='/admin-asks' component={AsksAdmin} />
+                        <AdminRoute path='/asks/:id' component={SingleAsk} />
+                        <AdminRoute path='/admin-tips' component={TipsAdmin} />
+                        <AdminRoute path='/admintips/:id' component={SingleTip} />
+                        <AdminRoute path='/add' component={AdminAdd} />
                     </AnimatedSwitch>
                 </Switch>
             </HashRouter>
