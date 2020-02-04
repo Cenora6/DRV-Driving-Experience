@@ -48,7 +48,6 @@ class TipsAdmin extends Component {
             width: "100%",
         };
         const { tips } = this.state;
-        console.log(tips)
         return (
             <>
                 <Header/>
