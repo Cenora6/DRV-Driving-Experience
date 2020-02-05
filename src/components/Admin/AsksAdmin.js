@@ -123,18 +123,6 @@ class AsksAdmin extends Component {
                             <span className='buttons__small tag' onClick={this.getAllAsks}>All {questions.length}</span>
                             <span className='buttons__small tag' onClick={this.handleNotAnswered}>Not answered {notAnsweredNo}</span>
                         </ul>
-                        <ul className='forum__asks__header'>
-                            <li>
-                                Title
-                            </li>
-                            <li>
-                                Description
-                            </li>
-                            <li>
-                                Posted
-                            </li>
-                        </ul>
-
                         { (this.state.pageCounter === 0) &&
                         filterQuestions.map((question, index) => {
                             return (

@@ -1,6 +1,12 @@
 .tips {
   &__week {
     cursor: auto;
+
+    @include desktop {
+      width: 50%;
+      margin: 0 auto;
+    }
+
     &__title {
       width: 100%;
       height: 4rem;
@@ -34,8 +40,18 @@
     }
 
     &__description {
+
+      @include desktop {
+        display: flex;
+        flex-direction: column;
+      }
+
       img {
         width: 100%;
+
+        @include desktop {
+          margin: 0 auto;
+        }
       }
 
       p {

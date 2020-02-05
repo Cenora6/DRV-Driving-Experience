@@ -24,17 +24,24 @@
     width: 25rem;
     display: flex;
     flex-direction: column;
-    background-color: rgba(169,169,169, 0.6);
-    border: 3px outset rgba(101,62,146, 0.7);
+    background-color: rgba(169, 169, 169, 0.6);
+    border: 3px outset rgba(101, 62, 146, 0.7);
 
     @include phone {
       width: 90%;
-      display: block;
+      height: 90%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
     label {
       margin: 1rem 3rem;
       font-size: 1.2rem;
+
+      @include phone {
+        margin: 0.5rem 3rem;
+      }
     }
 
     input {
@@ -47,6 +54,10 @@
       border-top: none;
       border-bottom: 1.5px solid $headerButtonBackground;
       margin: 0.5rem 3rem;
+
+      @include phone {
+        padding: 0.2rem;
+      }
     }
 
     &__buttons {
@@ -54,6 +65,7 @@
       justify-content: center;
       align-items: center;
       margin-bottom: 1rem;
+      text-align: center;
     }
   }
 }

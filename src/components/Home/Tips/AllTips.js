@@ -421,7 +421,7 @@ export default class AllTips extends Component {
                         </div>
                     </section>
                 </>
-                }}
+                }
                 <WelcomeFooter/>
             </>
         );
