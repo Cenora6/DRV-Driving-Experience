@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/DRV-Driving-Experience/precache-manifest.a33bc2162751a24aab5441e1664354cd.js"
+  "/DRV-Driving-Experience/precache-manifest.802c513988c37845ae050967037305af.js"
 );
 
 self.addEventListener('message', (event) => {
