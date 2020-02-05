@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "88f566c2b2efcbacb9d40c407bca18bb",
+    "revision": "e4a9d88a36d0ff9a3715cab497e2e862",
     "url": "/DRV-Driving-Experience/index.html"
   },
   {
@@ -8,8 +8,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/DRV-Driving-Experience/static/css/2.30f48858.chunk.css"
   },
   {
-    "revision": "6cdec8ce3e1c62b7797c",
-    "url": "/DRV-Driving-Experience/static/css/main.3a23c559.chunk.css"
+    "revision": "adb61363dacfa9ef9d79",
+    "url": "/DRV-Driving-Experience/static/css/main.21111455.chunk.css"
   },
   {
     "revision": "2d5a461c25e948eb6ef1",
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/DRV-Driving-Experience/static/js/2.05cd4497.chunk.js.LICENSE"
   },
   {
-    "revision": "6cdec8ce3e1c62b7797c",
-    "url": "/DRV-Driving-Experience/static/js/main.5395219f.chunk.js"
+    "revision": "adb61363dacfa9ef9d79",
+    "url": "/DRV-Driving-Experience/static/js/main.5794e34d.chunk.js"
   },
   {
     "revision": "ed7da8f931596d9a3f7a",
