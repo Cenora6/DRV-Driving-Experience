@@ -74,9 +74,25 @@ class Register extends Component {
                         password2: ""
                     });
 
-                    const { history } = this.props;
-                    history.push("/home");
+                    sessionStorage.setItem("username", `${authUser.user.displayName}`);
 
+                    firebase
+                        .firestore()
+                        .collection("users")
+                        .where("email", "==", email )
+                        .get()
+                        .then(doc => {
+
+                            doc.forEach(doc => {
+                                const role = doc.data().role;
+
+                                const {history} = this.props;
+                                if(role === "user") {
+                                    sessionStorage.setItem("role", "user");
+                                    history.push("/home");
+                                }
+                            });
+                        });
                 })
                 .catch((error) => {
                     if (error.code === 'auth/email-already-in-use') {

@@ -21,6 +21,7 @@
   &__user {
     color: $headerTextColor;
     margin: 2rem 2rem 2rem 0;
+    text-align: center;
 
     @include phone {
       display: flex;
@@ -37,6 +38,13 @@
       margin-bottom: -0.1rem;
       z-index: 100;
 
+      @include phone {
+        margin-top: 0.1rem;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        width: 5rem;
+      }
     }
 
     &__desc {

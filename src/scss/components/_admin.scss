@@ -31,10 +31,6 @@
 
   &__header {
 
-    @include phone {
-      width: 75%;
-    }
-
     li {
 
       @include phone {

@@ -294,7 +294,7 @@ class Profile extends Component {
                         :
                         <>
                         <button className='buttons__small' onClick={this.handleSubmit}>Save</button>
-                            {!(this.state.uploading) &&
+                            {(!(this.state.uploading) && this.state.file.length > 0) &&
                             <div className="spinner">
                                 <div className="bounce1"></div>
                                 <div className="bounce2"></div>

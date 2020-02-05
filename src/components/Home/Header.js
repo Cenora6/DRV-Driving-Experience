@@ -39,7 +39,8 @@ class Header extends Component {
             .auth()
             .signOut()
             .then(() => {
-                window.location = '/';
+                const {history} = this.props;
+                history.push("/")
             })
             .catch(error => {
                 console.log(error)
