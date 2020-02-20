@@ -3,6 +3,12 @@
   min-width: 360px;
 }
 
+html {
+  @media (min-width: 900px) {
+    font-size: 18px;
+  }
+}
+
 .switch-wrapper {
   position: relative;
 }
