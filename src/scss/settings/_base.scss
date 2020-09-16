@@ -1,19 +1,28 @@
 #root {
   font-family: 'Quicksand', sans-serif;
   min-width: 360px;
+  height: 100%;
 }
 
 html {
   @media (min-width: 900px) {
     font-size: 18px;
   }
+  height:100%;
+}
+
+body {
+  height:100%;
+  position:relative;
 }
 
 .switch-wrapper {
   position: relative;
+  height: 100%;
 }
 
 .switch-wrapper > div {
   position: absolute;
   width: 100%;
+  min-height: 100%;
 }

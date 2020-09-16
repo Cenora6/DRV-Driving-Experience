@@ -112,7 +112,7 @@ class Register extends Component {
                     gender: "",
                     description: "",
                     role: "user",
-                    registerDate: [new Date().getHours() + ':' + new Date().getMinutes()],
+                    registerDate: [new Date().getDay() + '-' + new Date().getMonth() + '-' + new Date().getFullYear()],
                 }).then(function(docRef) {
                 console.log("Document written with ID: ", docRef.id);
             })

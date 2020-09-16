@@ -125,14 +125,13 @@ class Login extends Component {
                             <NavLink to='/register'>
                                 <button className='buttons__small' type="submit" value="Submit">Register</button>
                             </NavLink>
-
                             {this.state.loginError ?
                                 <>
                                     <span data-for='error__login' data-tip="">
                                     <button className='buttons__small' type="submit" value="Submit"
                                             onClick={this.handleFormSubmit}>Login</button>
                                     </span>
-                                    <ReactTooltip className='error__class' id='error__login' type='error' delayHide={2000} effect='solid' place='right'>
+                                    <ReactTooltip className='error__class' id='error__login' type='error' delayHide={2000} effect='solid' place='bottom'>
                                         <span>{this.state.errorText}</span>
                                     </ReactTooltip>
                                 </>
