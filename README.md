@@ -24,6 +24,7 @@ After login in to the admin account, the header seactions are different than in 
 | [React Router Dom](https://www.npmjs.com/package/react-router-dom/) | DOM bindings for React Router. |
 | [SASS](https://www.npmjs.com/package/sass/) | A preprocessor scripting language that is interpreted or compiled into CSS.  |
 | [Node Sass](https://www.npmjs.com/package/node-sass/) | A library that provides binding for Node.js to LibSass, the C version of the popular stylesheet preprocessor, Sass. |
+| [Firebase](https://www.npmjs.com/package/firebase) | Tools from Google for building app infrastructure, improving app quality and growing your business like Realtime Database, Cloud Firestore, Storage, Cloud Messaging or Authentication.  |
 | [React Tooltip](https://www.npmjs.com/package/react-tooltip/) | Tooltips display informative text when users hover over, focus on, or tap an element. |
 | [React Router Transition](https://www.npmjs.com/package/react-router-transition/) | Painless transitions for React Router, powered by React Motion. | 
 | [React Responsive Carousel](https://www.npmjs.com/package/react-responsive-carousel/) | Powerful, lightweight and fully customizable carousel component for React apps. | 
