@@ -1,6 +1,6 @@
 # DRV Driving Experience
 
-### Description
+## Description
 An app, where you can find some driving tips and take a quiz to check your driving knowledge.
 
 ##### User
@@ -11,25 +11,29 @@ You can register and login to your own account. After login, you can see section
 > Login: admin@admin.pl
 > Password: admin@admin.pl
 
-After login in to the admin account, the header seactions are different than in user panel. Here you can use a "Tips" section, where you can edit the tips on a page or create new ones. In the section "Users" you can check all the registered users with the register date, email, username and whole profile data. Section "Asks" is used to answer questions asked by users. You can filter the questions based on the answered/not answered ones. You can also edit the answers already given or delete the questions. 
+After login in to the admin account, the header seactions are different than in user panel. Here you can use a "Tips" section, where you can edit the tips on a page or create new ones. In the section "Users" you can check all the registered users with the register date, email, username and whole profile data. Section "Asks" is used to answer questions asked by users. You can filter the questions based on the answered/not answered ones. You can also edit the answers already given or delete the questions.
+
+## Live Demo
+[DRV Driving Experience - live preview](https://cenora6.github.io/DRV-Driving-Experience/#/)
  
-### Technologies:
-- HTML5
-- SASS
-- React
+## Technologies and additional dependencies:
 
-### Additional dependencies: 
-- [Node Sass](https://www.npmjs.com/package/node-sass/)
-- [React Router Dom](https://www.npmjs.com/package/react-router-dom/)
-- [React Router Transition](https://www.npmjs.com/package/react-router-transition/)
-- [React Tooltip](https://www.npmjs.com/package/react-tooltip/)
-- [React Responsive Carousel](https://www.npmjs.com/package/react-responsive-carousel/)
-- [Read More React](https://www.npmjs.com/package/read-more-react/)
-- [React Share](https://www.npmjs.com/package/react-share/)
-- [React Slidedown](https://www.npmjs.com/package/react-slidedown/)
+| Tool | Description |
+| :-------------:|--------------|
+| [React](https://www.npmjs.com/package/react/) | A JavaScript library for creating user interfaces. |
+| [React Router Dom](https://www.npmjs.com/package/react-router-dom/) | DOM bindings for React Router. |
+| [SASS](https://www.npmjs.com/package/sass/) | A preprocessor scripting language that is interpreted or compiled into CSS.  |
+| [Node Sass](https://www.npmjs.com/package/node-sass/) | A library that provides binding for Node.js to LibSass, the C version of the popular stylesheet preprocessor, Sass. |
+| [React Tooltip](https://www.npmjs.com/package/react-tooltip/) | Tooltips display informative text when users hover over, focus on, or tap an element. |
+| [React Router Transition](https://www.npmjs.com/package/react-router-transition/) | Painless transitions for React Router, powered by React Motion. | 
+| [React Responsive Carousel](https://www.npmjs.com/package/react-responsive-carousel/) | Powerful, lightweight and fully customizable carousel component for React apps. | 
+| [Read More React](https://www.npmjs.com/package/read-more-react/) | A simple npm component for react that "intelligently" truncates text at the appropriate point given a min, an ideal, and max text length. | 
+| [React Share](https://www.npmjs.com/package/react-share/) | Social media share buttons and share counts for React. | 
+| [React Slidedown](https://www.npmjs.com/package/react-slidedown/) | React component which uses CSS to animate a child from its current height to height: auto when mounting/updating/unmounting. | 
 
-### Installation:
+## Installation:
+[node.js](http://nodejs.org/download/) is required to use ``npm``.
 
 -  ```git clone https://github.com/Cenora6/DRV-Driving-Experience.git``` to clone the repository
 - ```npm install``` to install all dependencies
-- ```npm start``` and ```http://localhost:3000/``` in the browser to preview the app :)
+- ```npm start``` and ```http://localhost:3000/``` in the browser to preview the app
